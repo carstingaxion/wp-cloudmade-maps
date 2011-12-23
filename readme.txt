@@ -3,7 +3,7 @@ Contributors: carstenbach
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XHR4SXESC9RJ6
 Tags: geo, geocoding, location, cloudmade, map, osm, openstreetmap, shortcode, tinymce-button, user-friendly GUI, widget
 Requires at least: 3.1
-Tested up to: 3.2.1
+Tested up to: 3.3
 Stable tag: 0.0.5
 
 Add static and interactive cloudmade maps to your website, using a widget, different shortcodes and a tinymce GUI for user-friendly map-embedding.
