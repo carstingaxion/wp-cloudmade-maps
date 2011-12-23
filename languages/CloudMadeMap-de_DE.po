@@ -1,0 +1,715 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Cloudmade Maps\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-23 01:53+0100\n"
+"PO-Revision-Date: 2011-12-23 01:54+0100\n"
+"Last-Translator: Carsten Bach <mail@carsten-bach.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: E:\\xampp\\htdocs\\standard\\wp-content\\plugins\\cbach-Cloudmade-map\n"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:50
+msgid "Cloudmade API Key"
+msgstr "Cloudmade API Schlüssel"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:51
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:71
+#, php-format
+msgid "Sign up for your personal API key <a href=\"%s\">here</a>"
+msgstr "Deinen persönlichen API Schlüssel bekommst Du <a href=\"%s\">hier</a>"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:60
+msgid "Cloudmade Style ID"
+msgstr "Cloudmade Style ID"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:61
+#, php-format
+msgid "Copy from Cloudmade <a href=\"%s\">Style editor</a> or leave blank for default style."
+msgstr "Kopiere ihn aus dem Cloudmade <a href=\"%s\">Style editor</a> oder nutze die Standard-Optik und lasse das Feld leer."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:70
+msgid "flickr Places API Key"
+msgstr "flickr Places API Schlüssel"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:71
+msgid "Needed for geo-locating and reverse geo-coding."
+msgstr "Benötigt für die Ortssuche."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:80
+msgid "Plugin Parts"
+msgstr "Plugin Bestandteile"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:86
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:970
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/static.php:12
+msgid "Static Maps"
+msgstr "Statische Karten"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:87
+msgid "Is needed to use the widget"
+msgstr "benötigt um das Widget nutzen zu können"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:95
+msgid "Sidebar Widget"
+msgstr "Seitenleisten Widget"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:96
+msgid "show static maps of last geotagged posts"
+msgstr "Zeige statische Karten der letzten geo-lokalisierten Artikel"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:104
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:993
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/active.php:11
+msgid "Interactive Maps"
+msgstr "Interaktive Karten"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:113
+msgid "Post Types"
+msgstr "Inhaltstypen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:114
+msgid "Choose the post types, where to add the \"Choose location\" meta box on the edit screen."
+msgstr "Wähle die Inhaltstypen, für die die \"Ort auswählen\" meta box in der Bearbeitungsanicht geladen werden soll."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:137
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:25
+msgid "Default Address"
+msgstr "Standard Adresse"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:143
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1502
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:27
+msgid "Street"
+msgstr "Straße"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:152
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1504
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:28
+msgid "Postal Code"
+msgstr "Postleitzahl"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:162
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1505
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:29
+msgid "City"
+msgstr "Stadt"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:171
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:298
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:445
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:475
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:505
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:766
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1506
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:30
+msgid "Region"
+msgstr "Gebiet"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:180
+msgid "Code"
+msgstr "Kennung"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:190
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:302
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:449
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:479
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:509
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:768
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1220
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1508
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:32
+msgid "Country"
+msgstr "Land"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:199
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1509
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:33
+msgid "Latitude"
+msgstr "Breitengrad"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:209
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1510
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:34
+msgid "Longitude"
+msgstr "Längengrad"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:219
+msgid "Add Geo-Markup"
+msgstr "Geo-Auszeichnung hinzufügen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:225
+#, php-format
+msgid "Add geo meta-tags to %1$s of every post and page"
+msgstr "Geo meta-tags zum %1$s aller Artikel und Seiten hinzufügen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:234
+#, php-format
+msgid "Add microformat geo-tags to %1$s of every post and page"
+msgstr "Maschinenlesbare microformat geo-tags zu %1$s aller Artikel und Seiten hinzufügen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:235
+#, php-format
+msgid "The rendered markup is visually hidden with %1$s"
+msgstr "Der ausgegebene HTML-Code wird mittels %1$s versteckt"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:243
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:383
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:654
+msgid "Database Options"
+msgstr "Datenbank Optionen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:249
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:389
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:660
+msgid "Restore defaults upon plugin deactivation/reactivation"
+msgstr "Stelle nach einer De- oder Reaktivierung die Standardeinstellungen wieder her"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:250
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:390
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:661
+msgid "Only check this if you want to reset plugin settings upon Plugin reactivation"
+msgstr "Nur auswählen, wenn die Standardeinstellungen wieder hergestellt und Eigene gelöscht werden sollen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:263
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:404
+msgid "Map size"
+msgstr "Kartengröße"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:269
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:410
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:579
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1238
+msgid "Width"
+msgstr "Breite"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:270
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:280
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:421
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:580
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:590
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1240
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1246
+msgid "in px"
+msgstr "in px"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:279
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:420
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:589
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1244
+msgid "Height"
+msgstr "Höhe"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:289
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:430
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:21
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:40
+msgid "Zoom level"
+msgstr "Zoomstufe"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:306
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:453
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:483
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:513
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:767
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1224
+msgid "County"
+msgstr "Landkreis"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:310
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:457
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:487
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:517
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:769
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1228
+msgid "Neighborhood"
+msgstr "Nachbarschaft"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:314
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:461
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:491
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:521
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:770
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1232
+msgid "Building"
+msgstr "Gebäude"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:319
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:564
+msgid "Marker Icon"
+msgstr "Marker Icon"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:320
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:571
+msgid "Enter an URL or upload an image for the markericon."
+msgstr "Gib eine URL an oder lade ein Bild für den Marker in die Medienverwaltung."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:329
+msgid "Background Element(s)"
+msgstr "Hintergrundelement(e)"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:330
+msgid "HTML Element, #ID- or .class-Name, where to add the background-image, e.g. <code>html</code>, <code>#wrapper</code> or multiple elements like <code>body, #wrapper</code>"
+msgstr "HTML Element, #ID- oder .class-Name, an welche das Hintergrundbild angefügt werden soll, z.B. <code>html</code>, <code>#wrapper</code> oder auch mehrere Elemente, wie z.B. <code>body, #wrapper</code>"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:338
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:614
+msgid "Alignment"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:346
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:540
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:622
+msgid "None"
+msgstr "Keine"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:347
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:623
+msgid "Left"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:348
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:624
+msgid "Center"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:349
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:625
+msgid "Right"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:353
+msgid "Show Adress"
+msgstr "Adresse anzeigen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:359
+msgid "Show address as caption of the map"
+msgstr "Adresse als Bildunterschrift der Karte ausgeben"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:368
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:639
+msgid "Example"
+msgstr "Beispiel"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:374
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:645
+msgid "Show example map with default configuration"
+msgstr "Zeige eine Beispiel-Karte mit den Standardeinstellungen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:375
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:646
+msgid "Is shown only on this page, centered to your current position"
+msgstr "Wird nur auf dieser Seite angezeigt und auf Deine aktuelle Position zentriert."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:411
+msgid "in px or percent"
+msgstr "in px oder Prozent"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:436
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:41
+msgid "Minimum zoom level"
+msgstr "kleinste Zoomstufe"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:466
+msgid "Start zoom level"
+msgstr "Anfangs Zoomstufe"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:496
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:42
+msgid "Maximum zoom level"
+msgstr "Größte Zoomstufe"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:526
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:43
+msgid "Map controls"
+msgstr "Karten-Steuerung"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:541
+msgid "Small control"
+msgstr "kleine Bedienelemente"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:542
+msgid "Large control"
+msgstr "umfangreiche Bedienelemente"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:546
+msgid "Displays scale of the current map view"
+msgstr "Maßstab der aktuellen Kartenansicht"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:555
+msgid "A small overview map for navigational purposes"
+msgstr "kleine Übersichtskarte"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:556
+msgid "\"Minimum zoom level\" must be 0 or 1 to make the overview map work"
+msgstr "\"kleinste Zoomstufe\" muss auf 0 oder 1 gesetzt sein um die Übersichtskarte anzuzeigen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:599
+msgid "Labels"
+msgstr "Beschriftungen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:605
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:46
+msgid "Add labels to marker"
+msgstr "Marker mit Beschriftungen versehen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:629
+msgid "copyright mention"
+msgstr "Urhebervermerk"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:630
+msgid "HTML Element, #ID- or .class-Name, where to move the copyright mention from Cloudmade, e.g. <code>#site-generator</code>"
+msgstr "HTML Element, #ID- oder .class-Name, zu welchem der Urhebervermerk von Cloudmade verschoben werden soll, z.B. <code>#site-generator</code>"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:673
+msgid "Categories"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:683
+msgid "Tags"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:684
+msgid "Separate tags with commas"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/class.CloudMadeMap.settings.php:692
+msgid "Users"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:403
+msgid "Map of"
+msgstr "Karte von"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:662
+#, php-format
+msgid "To see a map here, you should have <a href=\"%1$s\">javascript</a> enabled. <a href=\"%2$s\" title=\"How to enable Javascript in your browser\">Give it a try</a>!"
+msgstr "Um hier eine Karte zu sehen sollte <a href=\"%1$s\">Javascript</a> aktiviert sein. <a href=\"%2$s\" title=\"Wie man Javascript im Browser aktiviert?!\">Probiere es aus</a>!"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:763
+msgid "Zoom in"
+msgstr "Heran zoomen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:764
+msgid "Zoom out"
+msgstr "Heraus zoomen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:961
+msgid "Options"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:962
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1375
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1386
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:11
+msgid "General"
+msgstr "Allgemeine"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:962
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:970
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:993
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1375
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1386
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1445
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/active.php:11
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:11
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/static.php:12
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/widget.php:7
+msgid "Settings"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1008
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/credits.php:7
+msgid "Credits"
+msgstr "Danksagung"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1073
+msgid "Only integers are accepted."
+msgstr "Es sind nur Ganzzahlen erlaubt."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1088
+msgid "Please provide a correct URL."
+msgstr "Bitte gib eine korrekte URL an."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1102
+msgid "Only integers and simple chars are accepted."
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1117
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1136
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1154
+msgid "Please choose one of the provided options."
+msgstr "Bitte wähle eine der vorgegebenen Optionen."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1213
+msgid "default zoom level"
+msgstr "Standard Zoomstufe"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1215
+msgid "World"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1349
+#, php-format
+msgid "Please %1$s your wordpress to at least version %2$s"
+msgstr "Bitte %1$s Dein WordPress mindestens auf Version %2$s"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1352
+msgid "Upgrade"
+msgstr "Update"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1361
+#, php-format
+msgid "You need to run at least PHP %1$s"
+msgstr "Du benötigste mindestens PHP in der Version %1$s"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1372
+#, php-format
+msgid "Please insert a Cloudmade API key at %1$s."
+msgstr "Bitte gib unter %1$s einen Cloudmade API Schlüssel ein."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1383
+#, php-format
+msgid "Please define at least one post_type, where to load the \"%2$s\" meta box on the edit screen at %1$s."
+msgstr "Bitte gib unter %1$s mindestens einen post_type an, für den die \"%2$s\" meta box in der Bearbeitungsanicht geladen werden soll."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1387
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1476
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1515
+msgid "Choose location"
+msgstr "Ort auswählen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1461
+msgid "Donate"
+msgstr "Spenden"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1501
+msgid "Click on the map or drag the marker to choose location."
+msgstr "Klicke auf die Karte oder ziehe den Marker um einen Ort auszuwählen."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1507
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:31
+msgid "Region Code"
+msgstr "Regional Kennung"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1511
+msgid "Find on the map"
+msgstr "Auf der Karte suchen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1518
+#, php-format
+msgid "Please <a href=\"%1$s\">choose a location</a> before saving."
+msgstr "Bitte <a href=\"%1$s\">wähle einen Ort</a> bevor Du speicherst."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1736
+msgid "Upload"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/cloudmade-map.php:1772
+msgid "Your current marker:"
+msgstr "Dein aktueller Marker:"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/active.php:5
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:5
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/static.php:6
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/active.php:25
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/general.php:42
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/static.php:25
+msgid "Save Changes"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/active.php:29
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/static.php:30
+msgid "Hover to view full size"
+msgstr "Überfahren für die Vorschau"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/active.php:30
+msgid "Default marker with your approximated position."
+msgstr "Standardmarker Deiner vermuteten Position."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:13
+msgid "Usage of the Static Maps Shortcode"
+msgstr "Benutzung des Shortcode für Statische Karten"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:14
+msgid "For a simple static map inside a post or page use"
+msgstr "Für eine einfache statische Karte in einem Artikel oder einer Seite verwende"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:14
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:33
+msgid "The generated map will use the default values from this page."
+msgstr "Die erstellte Karte verwendet die Standardeinstellungen dieser Seite."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:15
+msgid "To show a personalized static map use one or more of the following attributes:"
+msgstr "Um eine angepasste statische Karte anzuzeigen verwende eines oder mehrere der folgenden Attribute:"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:17
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:36
+msgid "Map width"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:18
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:20
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:37
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:39
+msgid "Awaiting integers (in px) only, do not add any units."
+msgstr "Akzeptiert ausschließlich Zahlen, keine Einheiten angeben."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:19
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:38
+msgid "Map height"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:22
+msgid "to show the map as a background-image"
+msgstr "um eine Karte als Hintergundbild anzuzeigen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:24
+msgid "Width and Height are awaiting integers (in px) only, do not add any units."
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:26
+msgid "Try adding two shortcodes, one for a small preview and one for the background and give them different zoomlevels ;)"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:32
+msgid "Usage and control of the Interactive Maps"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:33
+msgid "For a simple active map inside a post or page use"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:34
+msgid "To show a personalized active map use one or more of the following attributes:"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:43
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:44
+msgid "Allowed attributes:"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:43
+msgid "<strong><code>L</code></strong> for large controll, <strong><code>S</code></strong> for a small one and leave or <strong><code>N</code></strong> for no control."
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:44
+msgid "Show the displays scale."
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:44
+msgid "are only <strong><code>1</code></strong> to show or <strong><code>0</code></strong> to hide"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:45
+msgid "Show a small overview map"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/contextual_help.php:47
+msgid "Description for marker &amp; label instead of post- or page-title."
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/menu/widget.php:7
+msgid "Widgets"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:6
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:17
+msgid "Add static map"
+msgstr "Statische Karte hinzufügen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:6
+msgid "Static map"
+msgstr "Statische Karte"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:8
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:35
+msgid "Add interactive map for one post"
+msgstr "Interkative Karte für einen Artikel hinzufügen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:8
+msgid "Interactive single map"
+msgstr "Interkative Einzelkarte"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:9
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:53
+msgid "Add interactive map for multiple posts"
+msgstr "Interkative Karte für mehrere Artikel hinzufügen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:9
+msgid "Interactive group map"
+msgstr "Interkative Gruppenkarte"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:25
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:43
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:73
+msgid "Cancel"
+msgstr ""
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:28
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:46
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:76
+msgid "Insert map"
+msgstr "Karte hinzufügen"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:60
+msgid "By default the active group-maps are using the same properties, as the active single-maps."
+msgstr "Standardmäßig nutzen die interkativen Gruppenkarten die gleichen Einstellungen wie die interaktiven Einzelkarten."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/tinymce/tiny_windowform.php:61
+msgid "Click here to change them for this map."
+msgstr "Klicke hier um sie für diese Karte anzupassen."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/widgets/last-posts-widget.php:9
+msgid "List your recent located posts and show static maps of their positions."
+msgstr "Zeigt die letzten lokalisierten Beiträge und zeigt statische Karten ihrer Positionen."
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/widgets/last-posts-widget.php:12
+msgid "Located posts"
+msgstr "Lokalisierte Beiträge"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/widgets/last-posts-widget.php:130
+msgid "Title:"
+msgstr "Titel:"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/widgets/last-posts-widget.php:135
+msgid "Categories:"
+msgstr "Kategorien"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/widgets/last-posts-widget.php:138
+msgid "Category IDs, separated by commas"
+msgstr "Kategorie IDs, Komma separiert"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/widgets/last-posts-widget.php:142
+msgid "Number of posts to show:"
+msgstr "Anzahl der Beiträge"
+
+#: E:\xampp\htdocs\standard\wp-content\plugins\cbach-Cloudmade-map/widgets/last-posts-widget.php:147
+msgid "show excerpt(s)"
+msgstr "Zeige Auszüge"
+
+#~ msgid "Marker icon"
+#~ msgstr "Marker Symbol"
+
+#~ msgid "Icon file"
+#~ msgstr "Symbol Datei"
+
+#~ msgid "Icon width"
+#~ msgstr "Symbol Breite"
+
+#~ msgid "Icon height"
+#~ msgstr "Symbol Höhe"
+
+#~ msgid "Please check your input."
+#~ msgstr "Bitte überprüfe Deine Eingabe."

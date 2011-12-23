@@ -1,0 +1,22 @@
+/**  hide unwanted microformat markup **/
+.cmm-geo-tags{
+  	display:none!important;
+} 
+
+/** keep the markerIcon above the label div **/
+img.wml-marker{
+	  z-index:  2000 !important;
+	  max-width: 1000px;
+}
+
+/** fix theme definition for over-wide images **/
+.wp-cmm_map-wrap,
+.wp-cmm_map-wrap .wml-container .wml-tile img {
+		max-width: 100%!important;
+}
+
+/** fix for wp-admin **/
+body.wp-admin .wp-cmm_map-wrap{
+		max-width: inherit !important;
+}
+
