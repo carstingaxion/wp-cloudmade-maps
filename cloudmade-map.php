@@ -33,7 +33,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
   class CloudMadeMap {
 
     const LANG = __CLASS__;
-		const VERS = '0.0.6';
+		const VERS = '0.0.5';
 		const NAME = 'WP Cloudmade Maps';
 		const WPNEED = '3.1';
 		const PHPNEED = '5.2.4';
