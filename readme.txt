@@ -85,10 +85,12 @@ There a no upgrade issues at the moment ;)
 
 
 == Screenshots ==
-1. General Settings Screen
-2. Settings Screen for Static maps options
-3. Settings Screen for Active maps options
-4. Edit Screen for new or existing posts, where to locate your current post
+1. GUI for embedding the shortcodes user-friendly
+2. General Settings Screen
+3. Settings Screen for Static maps options
+4. Settings Screen for Active maps options
+5. Edit Screen for new or existing posts, where to locate your current post
+
 
 
 == Changelog ==
@@ -107,6 +109,7 @@ If there is nothing from you, I'll go on doing one of the following:
 
 = roadmap =
 * update the help-section inside the help-tab
+* upgrading to CloudMades new "leaflet" library, when it supports the cloudmade style-ID for different map styles
 * give the ability to define horizontal- and vertical-anchor for larger Marker Icons
 * add an option to decide, whether to output xhtml or html markup
 * add geo:RSS markup to feeds
