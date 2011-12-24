@@ -15,7 +15,7 @@ Add static and interactive cloudmade maps to your website, using a widget, diffe
 With WP Cloudmade Maps you are able to add static and interactive maps to your website using Cloudmades designable OpenStreetMaps-Data.
 This way you can add maps that fits your webdesign. Choose from over 50.000 [ready-to-use map styles](http://maps.cloudmade.com/editor "Have a look at the style editor and find your style by color or tag") or create your own with the CloudMade Style Editor.
 
-The Plugin brings
+The Plugin comes with
 
 * a widget to show your last geotagged posts with static maps,
 * a shortcode for static maps
@@ -26,8 +26,9 @@ and countless attributes, to fit the maps your ideas.
 All shortcodes are accessible via an user-friendly tinymce button and a lightweight configuration interface for editors.
 As Administrator you're able to set everything as defaults, so your editor just have to 'click & drop' a new map inside a post, page or a custom_post_type at all.
 
-= General Features =
+= General - Features =
 
+* add maps that go nicely with your webdesign, by choosing from over 50.000 map-styles or painting your own
 * works with **posts, pages and custom posttypes**
 * adds **microformat geo-markup** to your located content, to make your geo-content machine-readable
 * adds **meta-tags with location information** to your html output, to make your website readable to geo-DBs
@@ -39,25 +40,45 @@ As Administrator you're able to set everything as defaults, so your editor just 
 * **JS- and CSS files are loaded conditionally** only when they are needed
 
 
-= Static Maps Features =
+= Static Maps - Features =
 
 * easy embed **static map images** into your content using GUI or shortcode
 * align maps with the default **WordPress alignment CSS-classes**
-* add maps as **background-images** to the *body*-tag or as *header-images*
+* add maps as **background-images** to the *body*-tag, as *header-images* or anywhere you want
 * show posts addresses as caption of the maps with WordPress default caption markup
 
-= Active Maps Features =
 
-* easy embed **static map images** into your content using GUI or shortcode
+= Active Maps for one Marker - Features =
+
+* easy embed **active maps** into your content using GUI or shortcode
 * align maps with the default **WordPress alignment CSS-classes**
 * add zoom controls
 * show map scale
 * navigate within a small overview-map
 * add descriptive labels to your map-markers
+* show posts `the_content()`, `the_excerpt()` or own html in an Info-Window attached to the marker
+
+
+= Active Maps for multiple Marker - Features =
+
+This part exists, but is still in development and not really production-ready. So, it is a small window into the next releases.
+
+* show one active map with multiple Markers, standing for posts of
+	* selectable categories,
+	* choosen tags,
+	* specific users,
+	* defined date-ranges,
+	* specific post-types,
+	* or anything else you could pick up and filter with a [WP_Query request](http://codex.wordpress.org/Class_Reference/WP_Query "See the codex to get an idea of the possibilities") - this is the higher vision ;)
+* show posts `the_content()` or `the_excerpt()` in an Info-Window attached to each marker
+
 
 = Languages =
+
 * English
 * German
+
+
 
 == Installation ==
 
@@ -79,9 +100,10 @@ There a no upgrade issues at the moment ;)
 
 
 == Frequently Asked Questions ==
+In the moment, there is no question I know about.
 
-
-
+Maybe you've some?!
+Drop me a line at wp-cloudmade-maps@carsten-bach.de
 
 
 == Screenshots ==
@@ -108,6 +130,7 @@ If you are having a feature request for this plugin, drop me a line at wp-cloudm
 If there is nothing from you, I'll go on doing one of the following:
 
 = roadmap =
+
 * update the help-section inside the help-tab
 * upgrading to CloudMades new "leaflet" library, when it supports the cloudmade style-ID for different map styles
 * give the ability to define horizontal- and vertical-anchor for larger Marker Icons
@@ -121,3 +144,7 @@ If there is nothing from you, I'll go on doing one of the following:
 * upload an own loading image
 * enable / disable Marker clustering for active-group-maps
 * upload own cluster images
+* add routing between two points, your posts position and your visitors position for example
+* remove PHP notices and warnings from the widget code
+* use a specific template file for the Info-Window, to keep it most flexible
+* edit, update or delete existing maps within the GUI
