@@ -1,7 +1,7 @@
 <?php
 
 function get_dynamic_settings_options ( $type ) {
-		global $wp_version;
+		global $wp_version, $wp_roles;
 		$options = array();
 
 		switch ( $type ) {
@@ -12,19 +12,21 @@ function get_dynamic_settings_options ( $type ) {
 						  'orderby'     => 'count'
 						);
 				    foreach ( get_categories( $args ) as $category) {
-								$options[''.$category->cat_ID.''] = $category->cat_name;
+								$options[''.$category->cat_ID.''] = $category->cat_name . ' <small><em>('. $category->count .')</small></em>';
 						}
 				    break;
 
 				case 'users' :
 						if ( version_compare ( $wp_version, '3.1.0', ">" ) ) {
 								foreach ( get_users() as $user) {
-										$options[''.$user->ID.''] = $user->display_name;
+										$WP_User = new WP_User( $user->ID );
+										$options[''.$user->ID.''] = $user->display_name . ' <small><em>('. translate_user_role( $wp_roles->role_names[$WP_User->roles[0]] ) .')</small></em>';
 								}
 						} else {
 								// use 3.0. fallback
 								foreach ( get_users_of_blog() as $user) {
-										$options[''.$user->ID.''] = $user->display_name;
+										$WP_User = new WP_User( $user->ID );
+										$options[''.$user->ID.''] = $user->display_name . ' <small><em>('. translate_user_role( $wp_roles->role_names[$WP_User->roles[0]] ) .')</small></em>';
 								}
 						}
 						break;
@@ -596,19 +598,29 @@ $this->defined_active_opts = array(
 			'class'   => 'small-text',
 		),
 		'labels-row' => array(
-			'label'		=> __('Labels', self::LANG ),
+			'label'		=> __('Label', self::LANG ),
 			'type'		=> 'rowgroup',
-			'rows'    => 1,
+			'rows'    => 2,
 			'usage'   => array( 'options_', 'widget_', 'tiny_' ),
 		),
 		'marker_labels'	=> array(
-			'label'		=> __('Add labels to marker', self::LANG ),
+			'label'		=> __('Add label to marker', self::LANG ),
 			'desc'		=> false,
 			'type'		=> 'checkbox',
 			'value' 	=> $this->active_opts['marker_labels'],
 			'usage'   => array( 'options_', 'widget_', 'tiny_' ),
 			'validate'=> 'numeric',
 			'validate_msg'  => false,
+		),
+		'title'	=> array(
+			'label'		=> __('Label title', self::LANG ),
+			'desc'		=> __('Show this text instead of post- or page-title.', self::LANG),
+			'type'		=> 'text',
+			'value' 	=> '',
+			'usage'   => array( 'options_', 'widget_', 'tiny_' ),
+			'validate'=> 'text',
+			'validate_msg'  => false,
+			'class'   => 'regular-text',
 		),
 		'align'	=> array (
 			'label' 	=> __( 'Alignment' ),
@@ -698,5 +710,30 @@ $this->defined_group_opts = array(
 			'validate_msg'  => false,
 			'options' => get_dynamic_settings_options ( 'users' ),
 			),
+		'posttypes'	=> array(
+			'label'		=> __('Post Types', self::LANG ),
+			'desc'		=> false,
+			'type'		=> 'terms_checklist',
+			'value' 	=> array(),
+			'usage'   => array( 'options_', 'widget_', 'tiny_' ),
+			'validate'=> 'options',
+			'validate_msg'  => false,
+			'options' => get_dynamic_settings_options ( 'posttypes' ),
+		),
+		'infoWcontent'	=> array (
+			'label' 	=> __( 'Infowindow-Content', self::LANG ),
+			'desc'		=> sprintf( __( 'To use your own templatefile, just copy %1$s from the %2$s plugin-folder at %3$s into your theme folder and modify it to your needs.', self::LANG ), '<strong>cloudmademaps-infowindow.php</strong>', self::NAME, CMM_PLUGIN_DIR ),
+			'type'		=> 'radio',
+			'value' 	=> 'none',
+			'usage'   => array( 'options_', 'widget_', 'tiny_'  ),
+			'validate'=> 'options',
+			'validate_msg'  => false,
+			'options' => array (
+					'none' 			=> __( 'No infowindow', self::LANG ),
+					'excerpt' 	=> __( 'Excerpt', self::LANG ),
+					'content'		=> __( 'Content', self::LANG ),
+					'tmpl_file' => __( 'Own templatefile', self::LANG ),
+			)
+		),
 );
 ?>

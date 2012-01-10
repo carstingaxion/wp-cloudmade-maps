@@ -49,11 +49,14 @@
 						</div>
 		   </div>
 
-<!-- -->
+
 
 		   <div id="wp-cmm_tiny_active_group" class="cmm-tiny-panel">
 		    		<h3><?php _e( 'Add interactive map for multiple posts', self::LANG ); ?></h3>
 
+						<p class="beta-info"><strong>Beta:</strong> <?php _e( 'This part is still in development. I recomend to not use this in production use.', self::LANG ); ?></p>
+   
+				    <p class="howto"><?php _e( 'Define your filter properties by selecting some of the given categories, tags , users, etc.', self::LANG ); ?></p>
 
   					<table class="form-table">
 <?php self::render_form_fields( $this->defined_group_opts, self::PREFIX, 'tiny_', 'group', 'tiny_group' );  ?>

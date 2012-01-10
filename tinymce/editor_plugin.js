@@ -13,10 +13,6 @@
 		init : function(ed, url) {
 
 			ed.addCommand('mceCMM', function() {
-/*			var vp = tinymce.DOM.getViewPort(),
-					H = vp.h - 80, W = ( 640 < vp.w ) ? 640 : vp.w;
-//				tb_show( ed.getLang('cloudmademap.buttontitle'), '#TB_inline?inlineId=cmm_tinymce_addshortcode_form&tab=wp-cmm_tiny_static&width='+W+'&height='+H);
-*/
 				ed.windowManager.open({
 					id : 'cmm_tinymce_addshortcode_form',
 					width : 600,
@@ -51,37 +47,14 @@
 	// Register plugin
 	tinymce.PluginManager.add('cloudmademap', tinymce.plugins.CloudmadeMap);
 	
-		// executes this when the DOM is ready
-/*
-jQuery.fn.wpcmm_tiny_init = function () {
-		jQuery('body').css('overflow', 'hidden');
-}
-console.log(tinyMCEPopup);
-
-tinyMCEPopup.executeOnLoad( jQuery('body').css('overflow', 'hidden') );
-*/
+	// executes this when the DOM is ready
 	jQuery(function(){
-/*
-jQuery("#cmm_tinymce_addshortcode_form:visible").hover(
-  function () {
-    jQuery('body').css('overflow', 'hidden');
-  },
-  function () {
-    jQuery('body').css('overflow', 'visible');
-  }
-);
 
-		if ( jQuery('#cmm_tinymce_addshortcode_form').is(":visible") ) {
-    		jQuery('body').css('overflow', 'hidden');
-    } else {
-    		jQuery('body').css('overflow', 'visible');
-    }
-*/
 		// generate jQuery UI Tabs for different shortcode-forms
 		jQuery( "#cmm_tinymce_addshortcode_form" ).tabs();
 		
-		//
-		 jQuery('#wp-cmm_tiny_group_tags').suggest("/wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ", ", resultsClass: 'wp-cmm_tiny_tag_suggest'});
+		// load WP tag suggest for text-input on active_group_maps
+		jQuery('#wp-cmm_tiny_group_tags').suggest("/wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ", ", resultsClass: 'wp-cmm_tiny_tag_suggest'});
 		
 		// reposition the dialog box to fit the screen
 		jQuery( "#cmm_tabs_navi a" ).click( function(){
@@ -103,7 +76,8 @@ jQuery("#cmm_tinymce_addshortcode_form:visible").hover(
 				}
 		});
 
-		//
+		// fly-out additional form fields with toggle arrow
+		// rebuild of wp-links functionality
 		jQuery( "#cmm_tinymce_addshortcode_form .toggle-arrow" ).click( function(){
       	jQuery( this ).toggleClass( 'toggle-active' );
 				jQuery( this ).next().toggle();
@@ -114,7 +88,7 @@ jQuery("#cmm_tinymce_addshortcode_form:visible").hover(
 		// bind close-handler to "Cancel"-Link
 		jQuery('.cmm-cancel .submitdelete').click( function() { tinyMCEPopup.close(); } );
 
-		// add changed-class to all inputs with non-default values
+		// add "changed"-class to all inputs with non-default values
 		jQuery('#cmm_tinymce_addshortcode_form input, #cmm_tinymce_addshortcode_form select').live( 'change', function () {
 
 				if ( jQuery( this ).is('[type="radio"]') ){
@@ -126,21 +100,10 @@ jQuery("#cmm_tinymce_addshortcode_form:visible").hover(
 		// handles the click event of the submit button
 		jQuery('#cmm_tinymce_addshortcode_form .button-primary').click(function(){
 
-/**
-				var shortcode = '[cmm_' + jQuery(this).attr('id');
-
-				jQuery('#wp-cmm_tiny_' + jQuery(this).attr('id') + ' .changed').each(function( ) {
-							shortcode += ' ' + jQuery(this).attr('name') + '="' + jQuery(this).val() + '"';
-				});
-
-				shortcode += ']';
-
-				// inserts the shortcode into the active editor
-				tinyMCE.activeEditor.execCommand('mceInsertContent', 0, shortcode);
-**/
-
+				// start shortcode with type of map
 				var shortcode = 'cmm_' + jQuery(this).attr('id');
 
+				// look for everything different to default
 				jQuery('#wp-cmm_tiny_' + jQuery(this).attr('id') + ' .changed').each(function( ) {
 
 						// strip tiny_static[], tiny_active[] and tiny_group[] from name-Attributes
@@ -163,10 +126,7 @@ jQuery("#cmm_tinymce_addshortcode_form:visible").hover(
 				var height = jQuery('#wp-cmm_tiny_' + jQuery(this).attr('id') + ' .wp-cmm_tiny_height').val();
 				var align = 'align' + jQuery('#wp-cmm_tiny_' + jQuery(this).attr('id') + ' .wp-cmm_align input:checked').val();
 
-//				var map_placeholder_image = '<img src="/wp-content/plugins/cbach-Cloudmade-map/img/b.gif" width="' + width + '" height="' + height + '" class="wp-cmm_placeholderImage ' + align + '" title="' + shortcode + '" />';
 				var map_placeholder_image = '<img src="/wp-includes/js/tinymce/plugins/wpgallery/img/t.gif" width="' + width + '" height="' + height + '" class="wp-cmm_placeholderImage ' + align + ' mceItem" title="' + shortcode + '" />';
-//				var map_placeholder_image = '<div style="width:' + width + 'px; height:' + height + 'px;" class="wp-cmm_placeholderImage ' + align + '" title="' + shortcode + '" />';
-//				var map_placeholder_image = '<p style="width:' + width + 'px; height:' + height + 'px;" class="wp-cmm_placeholderImage ' + align + '" title="' + shortcode + '" >[' + shortcode + ']</p>';
 
 				// inserts the shortcode into the active editor
 				tinyMCE.activeEditor.execCommand('mceInsertContent', 0, map_placeholder_image);

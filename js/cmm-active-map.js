@@ -33,6 +33,10 @@ $.fn.addCloudMadeMapMarkers = function(
         var mContent  = markerArray[i][7];     
         var mDraggable = ( markerArray[i][8] == 1 ) ? true : false;
         
+        // decode html entities from php
+        // @source:  http://stackoverflow.com/a/2419664
+        mContent = $("<div/>").html(mContent).text();
+        
         // Build the icon object with path, size and pixelOffset
         cmIcon[i]             = new CM.Icon();
         cmIcon[i].image       = mIcon;

@@ -4,7 +4,7 @@
  *  jQuery UI
 
 jQuery(function(){
-	jQuery('.wp-cmm_options_maxzoom').selectToUISlider().hide();
+	jQuery('.wp-cmm_maxzoom').selectToUISlider().hide();
 });
  */
 jQuery(document).ready(function($) {
@@ -49,43 +49,43 @@ jQuery(document).ready(function($) {
 
 			  // check that an API key exists, to enable the checkboxes of the pluginparts
 			  // on change
-		    $('#api_key').live('change', function() {
+		    $('#wp-cmm_options_general_api_key').live('change', function() {
 		        if ( $(this).val() ) {
-		            $('#pp_static').disableFormField( { status: false } );
-		            $('#pp_active').disableFormField( { status: false } );
+		            $('#wp-cmm_options_general_pp_static').disableFormField( { status: false } );
+		            $('#wp-cmm_options_general_pp_active').disableFormField( { status: false } );
 		        } else {
-		            $('#pp_static').disableFormField();
-		            $('#pp_widget').disableFormField();
-		            $('#pp_active').disableFormField();
+		            $('#wp-cmm_options_general_pp_static').disableFormField();
+		            $('#wp-cmm_options_general_pp_widget').disableFormField();
+		            $('#wp-cmm_options_general_pp_active').disableFormField();
 		        }
 		    });
 		    // on page load
 			  $(function() {
-		        if ( $('#api_key').val() ) {
-		            $('#pp_static').disableFormField( { status: false } );
-		            $('#pp_active').disableFormField( { status: false } );
+		        if ( $('#wp-cmm_options_general_api_key').val() ) {
+		            $('#wp-cmm_options_general_pp_static').disableFormField( { status: false } );
+		            $('#wp-cmm_options_general_pp_active').disableFormField( { status: false } );
 		        } else {
-		            $('#pp_static').disableFormField();
-		            $('#pp_widget').disableFormField();
-		            $('#pp_active').disableFormField();
+		            $('#wp-cmm_options_general_pp_static').disableFormField();
+		            $('#wp-cmm_options_general_pp_widget').disableFormField();
+		            $('#wp-cmm_options_general_pp_active').disableFormField();
 		        }
 		    });
 
 			  // check that "static maps pluginpart is active, to make the widget work
 			  // on change
-		    $('#pp_static').live('change', function() {
+		    $('#wp-cmm_options_general_pp_static').live('change', function() {
 		        if ( $(this).is( ':checked' ) ) {
-		            $('#pp_widget').disableFormField( { status: false } );
+		            $('#wp-cmm_options_general_pp_widget').disableFormField( { status: false } );
 		        } else {
-		            $('#pp_widget').disableFormField();
+		            $('#wp-cmm_options_general_pp_widget').disableFormField();
 		        }
 		    });
 		    // on page load
 			  $(function() {
-		        if ( $('#pp_static').is( ':checked' ) ) {
-		            $('#pp_widget').disableFormField( { status: false } );
+		        if ( $('#wp-cmm_options_general_pp_static').is( ':checked' ) ) {
+		            $('#wp-cmm_options_general_pp_widget').disableFormField( { status: false } );
 		        } else {
-		            $('#pp_widget').disableFormField();
+		            $('#wp-cmm_options_general_pp_widget').disableFormField();
 		        }
 		    });
 
@@ -321,6 +321,11 @@ jQuery(document).ready(function($) {
 		 */
 		if ( $('body').is('.post-new-php, .post-php') ) {
 
+				/**
+				 *
+				 *
+				 *
+				 */
 				$("input#publish").click(function( e ) {
 						if ( $( '#content_ifr').contents().find('.wp-cmm_placeholderImage')
 									&& ( $('#cmm_post_meta_lat').val() == '' || $('#cmm_post_meta_lng').val() == '' ) ) {
@@ -331,6 +336,12 @@ jQuery(document).ready(function($) {
 						}
 				});
 
+
+				/**
+				 *
+				 *
+				 *
+				 */
 				$(".meta-box-sortables #cmm_chose_location").mouseenter(function() {
 						CM.Event.addListener(wp_cmm_map, 'click', function( latlng ) {
 								wp_cmm_map._overlays[0].setLatLng( latlng );
@@ -339,6 +350,53 @@ jQuery(document).ready(function($) {
 						});
 				});
 
+
+				/**
+				 *
+				 *
+				 *
+				 */
+
+			  // check that minzoom is 0 or 1, to make the overview-control work
+			  $('#wp-cmm_tiny_active_minzoom').live('change', function() {
+		        if ( $(this).val() == 0 || $(this).val() == 1 ) {
+		            $('#wp-cmm_tiny_active_overview').disableFormField( { status: false } );
+		        } else {
+		            $('#wp-cmm_tiny_active_overview').disableFormField();
+		        }
+		    });
+			  $(function() {
+		        if ( $('#wp-cmm_tiny_active_minzoom').val() == 0 || $('#wp-cmm_tiny_active_minzoom').val() == 1 ) {
+		            $('#wp-cmm_tiny_active_overview').disableFormField( { status: false } );
+		        } else {
+		            $('#wp-cmm_tiny_active_overview').disableFormField();
+		        }
+		    });
+
+
+			  // check that minzoom is smaller than zoom and this is smaller than maxzoom
+		    $('#wp-cmm_tiny_active_minzoom, #wp-cmm_tiny_active_zoom, #wp-cmm_tiny_active_maxzoom').live('focusin change', function(e) {
+		        if (e.type == 'focusin') {
+		      	      current_value =  $(this).val();
+		        } else {
+		              if (  parseInt( $('#wp-cmm_tiny_active_minzoom').val() ) <=  parseInt( $('#wp-cmm_tiny_active_zoom').val() )
+		                    &&
+		                    parseInt( $('#wp-cmm_tiny_active_zoom').val() ) <=  parseInt( $('#wp-cmm_tiny_active_maxzoom').val() )
+		                 ) {
+		                  //console.log('erlaubt');
+		                  current_value =  $(this).val();
+		                  //$('#map_zoom_control_error').fadeOut('slow');
+		              } else {
+		                  //console.log('verboten');
+		                  $(this).val( current_value );
+		                  //$('#map_zoom_control_error').fadeIn('slow');
+		              }
+		        }
+		    });
+		    
+		    
+		    
+		    
 
 				if ( typeof CMM_geo_lib != 'undefined' && typeof CMM_geo_lib.flickr_places_api_key != 'undefined' && CMM_geo_lib.flickr_places_api_key != '' ) {
 
@@ -504,7 +562,7 @@ jQuery(document).ready(function($) {
 		        } else {
 				        $('#' + formFieldSuffix + '_street').val( '' ).removeClass('waiting');
 						}
-				}, {distance: 'closest', objectType: 'road' } );
+				}, {distance: 'closest', objectType: 'road', results: 1 } );
 		  	return;
 		}
 

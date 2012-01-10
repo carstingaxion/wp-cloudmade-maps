@@ -1,10 +1,12 @@
 === WP Cloudmade Maps ===
-Contributors: carstenbach
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XHR4SXESC9RJ6
-Tags: geo, geocoding, location, cloudmade, map, osm, openstreetmap, shortcode, tinymce-button, user-friendly GUI, widget
-Requires at least: 3.1
-Tested up to: 3.3
-Stable tag: 0.0.5
+Contributors: 			carstenbach
+Donate link: 				https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XHR4SXESC9RJ6
+Tags: 							geo, geocoding, location, cloudmade, map, osm, openstreetmap, shortcode, tinymce-button, user-friendly GUI, widget
+Author URI:       	http://carsten-bach.de
+Author:            	Carsten Bach
+Requires at least: 	3.1
+Tested up to: 			3.3.1
+Stable tag: 				0.0.6
 
 Add static and interactive cloudmade maps to your website, using a widget, different shortcodes and a tinymce GUI for user-friendly map-embedding.
 
@@ -80,6 +82,9 @@ This part exists, but is still in development and not really production-ready. S
 
 
 
+
+
+
 == Installation ==
 
 1.  Extract the zip file
@@ -94,8 +99,16 @@ This part exists, but is still in development and not really production-ready. S
 
 
 
+
+
+
+
 == Upgrade Notice ==
 There a no upgrade issues at the moment ;)
+
+
+
+
 
 
 
@@ -104,6 +117,10 @@ In the moment, there is no question I know about.
 
 Maybe you've some?!
 Drop me a line at wp-cloudmade-maps@carsten-bach.de
+
+
+
+
 
 
 == Screenshots ==
@@ -115,8 +132,24 @@ Drop me a line at wp-cloudmade-maps@carsten-bach.de
 
 
 
+
+
 == Changelog ==
 
+= 0.0.6 ( January 2012 ) =
+
+*   add: optimized the usability of the GUI for mutual dependence of some options
+*   add: alternate marker-title to marker of interactive single maps using the GUI
+*   fix: CSS improvements for the GUI
+*   fix: wrong jQuery fallback path
+*   add: filter markers on active-group-maps by post_type
+*   add: choose, via the GUI, what content to show in infoWindow attached to markers on active_group_maps: nothing, `the_excerpt()`, `the_content()` or to use an own templatefile
+*   add: sample template-file for infoWindow output, ready to modify and use in your theme
+*   fix: updated the help-section for static_maps and active_single_maps
+*   fix: updated the german translation
+*   add: pot-file
+*
+*
 = 0.0.5 ( December 2011 ) =
 
 *   first public release
@@ -131,12 +164,11 @@ If there is nothing from you, I'll go on doing one of the following:
 
 = roadmap =
 
-* update the help-section inside the help-tab
+* update the help-section inside the help-tab for the enclosing variant of [cmm_active_single] and for [cmm_active_group]
 * upgrading to CloudMades new "leaflet" library, when it supports the cloudmade style-ID for different map styles
 * give the ability to define horizontal- and vertical-anchor for larger Marker Icons
 * add an option to decide, whether to output xhtml or html markup
 * add geo:RSS markup to feeds
-* optimizing the usability of the GUI for mutual dependence of some options
 * add an error message for non-existing default latitude and longitude
 * add the ability to show the active maps with a caption of the address
 * add a "show on map link", to jump directly to a specific point
@@ -144,7 +176,8 @@ If there is nothing from you, I'll go on doing one of the following:
 * upload an own loading image
 * enable / disable Marker clustering for active-group-maps
 * upload own cluster images
-* add routing between two points, your posts position and your visitors position for example
+* add routing between two points, your posts position and your site-visitors position for example
 * remove PHP notices and warnings from the widget code
-* use a specific template file for the Info-Window, to keep it most flexible
 * edit, update or delete existing maps within the GUI
+* setup a demo page with example maps
+* add fullscreen switcher to active maps

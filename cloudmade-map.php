@@ -5,7 +5,7 @@
     Description:  Add static and interactive cloudmade maps to your website, using a widget, different shortcodes and a tinymce GUI for user-friendly map-embedding.
     Author:       Carsten Bach
     Author URI:   http://carsten-bach.de
-    Version:      0.0.5
+    Version:      0.0.6
     License:      GPL
 
     Copyright 2011  Carsten Bach  (email: mail@carsten-bach.de)
@@ -33,7 +33,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
   class CloudMadeMap {
 
     const LANG = __CLASS__;
-		const VERS = '0.0.5';
+		const VERS = '0.0.6';
 		const NAME = 'WP Cloudmade Maps';
 		const WPNEED = '3.1';
 		const PHPNEED = '5.2.4';
@@ -59,9 +59,6 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
     private $localized_vars = array();
     private $cmm_base = array();
     
-#    private $defined_opts = array();
-static public $defined_general_opts;
-
 		public function __construct ( ) {
 
 				// get all options
@@ -98,10 +95,8 @@ static public $defined_general_opts;
 				// Add additional links to plugin-description-section
 				add_filter( 'plugin_row_meta', array( &$this, 'plugin_row_meta' ), 10, 2 );
 
-				//
-				add_action('init', array( &$this, 'load_settings') );
-
-#        add_filter( 'the_content' , array( &$this, 'replace_placeholder_image') );
+				// load settings very late, to be sure that theme-stuff is loaded
+				add_action('init', array( &$this, 'load_settings'), 999 );
 
 				// check for dependecies and remove shortcodes from content, when errors appear
 				if ( ! $this->check_dependecies( ) ){
@@ -165,9 +160,7 @@ static public $defined_general_opts;
 				if ( is_admin() ) {
 						// get $post-object from ID inside the URL, cause $post is not present on init-hook
 						$post = get_post( $_REQUEST['post'] );
-# echo '<pre>';
-# var_dump($_REQUEST);
-# echo '</pre>';
+
 						// check for existence of static- or active-map-pluginparts
 				    if ( $this->general_opts['pp_active'] ||  $this->general_opts['pp_static'] ) {
 
@@ -256,18 +249,17 @@ static public $defined_general_opts;
 		}
 
 
+		/**
+		 *  get predefined options as arrays
+		 *  from class.CloudMadeMap.settings.php
+		 *
+		 *  @since  0.0.4
+		 */
 		public function load_settings ( ) {
-				// get predefined option arrays
 				include_once 'class.CloudMadeMap.settings.php';
 		}
-/*
-		public function get_settings ( $type ) {
-				switch ( $type ) {
-						case 'general' :
-						    return $this->defined_general_opts;
-				}
-		}
-*/
+
+
 		/**
 		 *  Prepare JS and CSS for frontend
 		 *
@@ -437,18 +429,18 @@ static public $defined_general_opts;
 				$this->count++;
 				
         extract(shortcode_atts(array(
-          'width'       => $this->active_opts['width'],
-          'height'      => $this->active_opts['height'],
-          'zoom'        => $this->active_opts['zoom'],
-          'minzoom'     => $this->active_opts['minzoom'],
-          'maxzoom'     => $this->active_opts['maxzoom'],
-          'control'    => $this->active_opts['control'],
-          'scale'       => $this->active_opts['scale'],
-          'overview'    => $this->active_opts['overview'],
-          'marker_labels'      => $this->active_opts['marker_labels'],
-          'title'       => $post->post_title,
-          'copyright'   => $this->active_opts['copyright'],
-          'align'       => $this->active_opts['align']
+          'width'       		=> $this->active_opts['width'],
+          'height'      		=> $this->active_opts['height'],
+          'zoom'        		=> $this->active_opts['zoom'],
+          'minzoom'     		=> $this->active_opts['minzoom'],
+          'maxzoom'     		=> $this->active_opts['maxzoom'],
+          'control'    			=> $this->active_opts['control'],
+          'scale'       		=> $this->active_opts['scale'],
+          'overview'    		=> $this->active_opts['overview'],
+          'marker_labels'		=> $this->active_opts['marker_labels'],
+          'title'       		=> $post->post_title,
+          'copyright'   		=> $this->active_opts['copyright'],
+          'align'      			=> $this->active_opts['align']
         ), $atts ) );
 
 
@@ -467,6 +459,9 @@ static public $defined_general_opts;
 
 				// set alignment
     		$this->map_align = 'align'.$align;
+
+				//
+#				$this->map_caption = true;
 						
         // clean $content from wrongly left <p>-tags
 				if ( $content !== null && isset( $content[0] ) && isset( $content[1] ) && isset( $content[2] ) ) {
@@ -504,6 +499,7 @@ static public $defined_general_opts;
 		 *  Generate shortcode output for [cmm_active_group]
 		 *
 		 *  @since  0.0.5
+		 *  @todo   choose between excerpt, content, own template or none infowindow-content
 		 */
     public function create_active_group_map ( $atts ) {
 
@@ -528,12 +524,13 @@ static public $defined_general_opts;
           'scale'       		=> $this->active_opts['scale'],
           'overview'    		=> $this->active_opts['overview'],
           'marker_labels'   => $this->active_opts['marker_labels'],
+          'infoWcontent'    => false,
           'copyright'   		=> $this->active_opts['copyright'],
           'align'           => $this->active_opts['align'],
           'labels_as_link'  => false,
           'category'        => '',
           'tag'            	=> '',
-          'author'          => '1',
+          'author'          => '',
           'date'            => '',
           'post_type'				=> 'any',
           'exclude'         => '',
@@ -583,12 +580,40 @@ static public $defined_general_opts;
 				if ( $exclude )
 				  $args['post__not_in']  = $exclude;
 				  
+				// make sure that apache wont loop to death, strip all cmm-shortcodes
+				add_filter( 'the_content', array( &$this, 'strip_selected_shortcodes' ) );
+
 				// build new WP loop with our geo posts
 				$cmm_query = new WP_Query( $args );
 				while ( $cmm_query->have_posts() ) : $cmm_query->the_post();
 
 						// get latitude & longitude for the current post
 				    $coordinates = $this->get_coordinates( $post );
+				    
+				    // build infoWindow Content
+						if ( $infoWcontent && $infoWcontent != 'none' ) {
+								switch ( $infoWcontent ) {
+					        case 'excerpt' :
+                    $infoWindowContent  = get_the_excerpt();
+					        	break;
+
+					        case 'content' :
+					          // retrieve unfiltered content
+                    $infoWindowContent = get_the_content();
+                    // do the same stuff as on the_content()
+                    $infoWindowContent = apply_filters('the_content', $infoWindowContent);
+										$infoWindowContent = str_replace(']]>', ']]&gt;', $infoWindowContent);
+					        	break;
+
+					        case 'tmpl_file' :
+                    $infoWindowContent  = $this->get_infoWindow_content();
+					        	break;
+				        }
+				        
+								// clean infoWindow-content to make it work with JavaScript
+		            $infoWindowContent  = trim( preg_replace( '/\s+/', ' ', htmlentities( $infoWindowContent, ENT_QUOTES, "UTF-8" ) ) );
+
+						} else {	$infoWindowContent	=	'';	}
 
 				    $output .= "['".
 									$coordinates['lat']."','".
@@ -598,8 +623,7 @@ static public $defined_general_opts;
 									$this->active_opts['marker_icon_width']."','".
 									$this->active_opts['marker_icon_height']."','".
 									$marker_labels."','".
-				#        $output .= "'".trim( preg_replace( '/\s+/', ' ', get_the_excerpt() ) )."'";
-				    			strip_shortcodes ( trim( preg_replace( '/\s+/', ' ', get_the_content() ) ) )."','".
+									$infoWindowContent."','".
 									$dragable;
 
 
@@ -612,12 +636,72 @@ static public $defined_general_opts;
 				endwhile;
 				wp_reset_postdata();
 
+				// allow doing cmm-shortcodes from now
+				remove_filter( 'the_content', array( &$this, 'strip_selected_shortcodes' ) );
+
 				// build marker array for multiple markers
 				$this->localized_vars['marker']   = "[".$output."]";
 
 				// prepare inline-scripts, then echo everything
 	 			return $this->render_js ( $this->localized_vars );
     }
+
+
+		/**
+		 *  retrieve content for the markers infoWindow from theme-template file
+		 *
+		 *  @since  0.0.6
+		 *  @return string	parsed html content of the template file or error-msg, if file not exists
+		 */
+		function get_infoWindow_content () {
+				$file = get_stylesheet_directory().'/cloudmademaps-infowindow.php';
+				if ( file_exists( $file ) ) {
+						ob_start();
+						include $file;
+						$infoWindowContent = ob_get_clean();
+				} else {
+				    if ( current_user_can( 'publish_posts' ) )
+						$infoWindowContent = '<h2>' . __( 'Error - something went wrong', self::LANG ) . '</h2><p class="error wp-cmm_error filemissing">'.sprintf( __( 'Please copy %1$s from the %2$s plugin-folder at %3$s into your theme folder.', self::LANG ), '<strong>cloudmademaps-infowindow.php</strong>', self::NAME, CMM_PLUGIN_DIR ) . '</p>';
+				}
+
+        return $infoWindowContent;
+		}
+
+
+		/**
+		 *  strip only cmm-shortcodes from content
+		 *
+		 *  Strips specific start and end shortcodes tags. Preserves contents.
+		 *
+		 *  @since  0.0.6
+		 *  @param  string  the content to be filtered
+		 *  @return string  the filtered content
+		 *  @source http://pastebin.com/5CJKL5id
+		 */
+		function strip_selected_shortcodes($text){
+		    return preg_replace('%
+		        # Match an opening or closing WordPress tag.
+		        \[/?                 # Tag opening "[" delimiter.
+		        (?:                  # Group for Wordpress tags.
+		          cmm_static|cmm_active_single|cmm_active_group     # Add other tags separated by |
+		        )\b                  # End group of tag name alternative.
+		        (?:                  # Non-capture group for optional attribute(s).
+		          \s+                # Attributes must be separated by whitespace.
+		          [\w\-.:]+          # Attribute name is required for attr=value pair.
+		          (?:                # Non-capture group for optional attribute value.
+		            \s*=\s*          # Name and value separated by "=" and optional ws.
+		            (?:              # Non-capture group for attrib value alternatives.
+		              "[^"]*"        # Double quoted string.
+		            | \'[^\']*\'     # Single quoted string.
+		            | [\w\-.:]+      # Non-quoted attrib value can be A-Z0-9-._:
+		            )                # End of attribute value alternatives.
+		          )?                 # Attribute value is optional.
+		        )*                   # Allow zero or more attribute=value pairs
+		        \s*                  # Whitespace is allowed before closing delimiter.
+		        /?                   # Tag may be empty (with self-closing "/>" sequence.
+		        \]                   # Opening tag closing "]" delimiter.
+		        %six', '', $text);
+		}
 
 
 		/**
@@ -782,7 +866,7 @@ static public $defined_general_opts;
 				if ( !wp_script_is( 'jquery' ) ) {
 						$jquery = 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js';
 						if ( !fopen($jquery, 'r') ) {
-								$jquery = plugins_url('/js/jquery-1.6.4.min.js');
+								$jquery = plugins_url('/js/jquery-1.6.4.min.js', __FILE__ );
 						}
 						wp_enqueue_script('jquery', $jquery, false, '1.6.4', true);
 				}
@@ -844,6 +928,7 @@ static public $defined_general_opts;
     }
     
 
+
 		/**
 		 *  Add geo meta-tags to head
 		 *
@@ -903,14 +988,13 @@ static public $defined_general_opts;
 
     }
 
-/*
-    public function get_only_geotagged_posts ( $where ) {
-        global $wpdb;
-        $where .= ' AND '.$wpdb->prefix . 'posts.ID IN (SELECT DISTINCT object_id FROM ' . $wpdb->prefix . 'geo_mashup_location_relationships)';
-        return $where;
-    }
-*/
 
+		/**
+		 *  Replace the placeholder-image with the real shortcode
+		 *  for frontend output
+		 *
+		 *  @since  0.0.5
+		 */
 		public function replace_placeholder_image ( $content ) {
 				$content = preg_replace('!.*?<img.*?class="wp-cmm_placeholderImage.*?title="(.*?)".*?/>.*?!i', '[$1] ', $content );
         $content =  force_balance_tags( $content );
@@ -975,8 +1059,6 @@ static public $defined_general_opts;
 
 										$this->map_case = 'admin-static-sample';
 										add_action( 'admin_print_scripts-' . $CMM_static_page, array( &$this, 'yql_geo_library'));
-										#add_action( 'admin_print_scripts-' . $CMM_static_page, array( &$this, 'static_map_js'));
-										#$this->static_map_js( );
 		            }
 								add_action( 'admin_print_scripts-' . $CMM_static_page, array( &$this, 'admin_scripts'));
 		        }
@@ -1003,9 +1085,8 @@ static public $defined_general_opts;
 		            add_action( 'admin_print_scripts-' . $CMM_active_page, array( &$this, 'admin_scripts'));
 		        }
 
-		/*  		*/
-		        include_once 'menu/credits.php';
-		        $CMM_credits_page = add_submenu_page( sanitize_title_with_dashes( strtolower( self::NAME ) ).'-general-options', __('Credits', self::LANG )." &lsaquo; ".self::NAME, __('Credits', self::LANG), 'manage_options',  CMM_PLUGIN_DIR.'/menu/credits.php', 'CMM_Menu_Credits');
+
+		        $CMM_credits_page = add_submenu_page( sanitize_title_with_dashes( strtolower( self::NAME ) ).'-general-options', __('Credits', self::LANG )." &lsaquo; ".self::NAME, __('Credits', self::LANG), 'manage_options',  sanitize_title_with_dashes( strtolower( self::NAME ) ).'-credits', array( &$this, 'admin_menu_credits' ) );
 		        add_action( 'admin_print_styles-' . $CMM_credits_page, array( &$this, 'admin_css') );
 
 				}
@@ -1023,15 +1104,13 @@ static public $defined_general_opts;
 		public function admin_menu_active ( ) {
 				include_once 'menu/active.php';
 		}
-		
+
+		public function admin_menu_credits ( ) {
+				include_once 'menu/credits.php';
+		}
 		
 		public function validate_options ( $input ) {
-/*
-echo '<pre>';
-echo '<h2>$input</h2>';
-print_r($input);
-echo '</pre>';
- */
+
 				$valid = array();
 
 				switch ( $input['usage_env'] ) {
@@ -1120,7 +1199,7 @@ echo '</pre>';
 								  break;
 								  
 								  
-								  
+/*
 								case 'multioptions' :
 								  $valid[$key]  = array();
 									foreach ( $tmp as $tmp_v ) {
@@ -1137,10 +1216,11 @@ echo '</pre>';
 											}
 								  }
 								  break;
-
+*/
 
 								case 'terms_checklist' :
 								  $valid[$key]  = array();
+#var_dump($tmp);
 									foreach ( $tmp as $k => $v ) {
 										  if ( is_numeric ( $v ) || $v == $predefined_opts[$key]['value'] ){
 										      array_push($valid[$key], $k);
@@ -1159,31 +1239,11 @@ echo '</pre>';
 						}
 
 				}
-#				$valid = array_replace ( $old_opts, $valid );
-/*
-echo '<pre>';
-echo '<h2>$valid</h2>';
-print_r($valid);
-echo '</pre>';
-echo '<pre>';
-echo '<h2>OLD $old_opts</h2>';
-print_r($old_opts);
-echo '</pre>';
- */
+
 				foreach ( $old_opts as $k => $v ) {
            	$old_opts[$k]	= ( isset( $valid[$k] ) ) ? $valid[$k] : null;
-      /*     	if ( isset( $valid[$k] ) ) {
-               $old_opts[$k]	=  $valid[$k];
-						 } else {
-               $old_opts[$k]	=  null;
-						 }   */
 				}
-/*
-echo '<pre>';
-echo '<h2>NEW $old_opts</h2>';
-print_r($old_opts);
-echo '</pre>';
- */
+
 				return $old_opts;
 		}
 
@@ -1202,9 +1262,10 @@ echo '</pre>';
 
 		/**
 		 *  Load interface to configure static maps output
-		 *  used for: tinymce-button, widget
+		 *  used for: widget
 		 *
 		 *  @since  0.0.4
+		 *  @todo   remove this fn and use render_form_fields()
 		 */
 		public function static_maps_opts_interface ( $defaults ) {
 		?>
@@ -1306,32 +1367,6 @@ echo '</pre>';
 				return trim($wp, ' ,');
 		}
 		
-		
-		/**
-		 *  Define default options for [cmm_static] shortcode used with tinymce button
-		 *
-		 *  @since  0.0.4
-
-		public function tinymce_static_maps_default_opts ( ) {
-
-				$opts = get_option( 'CMM_static_opts');
-				$defaults = array();
-
-				$defaults['zoom']['id'] = 'zoom';
-				$defaults['zoom']['name'] = 'zoom';
-				$defaults['zoom']['value'] = $opts['zoom'];
-
-				$defaults['width']['id'] = 'width';
-				$defaults['width']['name'] = 'width';
-				$defaults['width']['value'] = $opts['width'];
-
-				$defaults['height']['id'] = 'height';
-				$defaults['height']['name'] = 'height';
-				$defaults['height']['value'] = $opts['height'];
-
-				return $defaults;
-		}
-		 */
 
 		/**
 		 *  Generate messages for WP_Error Class
@@ -1532,16 +1567,15 @@ echo '</pre>';
 			  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			      return $post_id;
 */
-#echo 'fn<br /><br />';
-#wp_die();
+
 				// verify this came from our screen and with proper authorization,
 			  if ( !isset( $_POST[ sanitize_title_with_dashes( strtolower( self::NAME ) ) ] ) )
 			      return $post_id;
-#echo 'isset( $_POST<br /><br />';
+
 				// verify this came from our screen and with proper authorization,
 			  if ( !wp_verify_nonce( $_POST[ sanitize_title_with_dashes( strtolower( self::NAME ) ) ], plugin_basename( __FILE__ ) ) )
 			      return $post_id;
-#echo 'wp_verify_nonce<br /><br />';
+
 				// set post ID if is a revision
 				if( $parent_id = wp_is_post_revision ( $post_id ) ) {
 						$post_id = $parent_id;
@@ -1555,11 +1589,11 @@ echo '</pre>';
 					        return $post_id;
 					  }
 				}
-#echo 'get_post_type_object<br /><br />';
+
 			  // validate inputs
 			  $input = $_POST['cmm_post_meta'];
 			  $old = get_post_meta($post_id, '_wp_cmm_location', true );
-#var_dump($input);
+
 				// street
 			  $tmp['street'] =  wp_filter_nohtml_kses($input['street']); // Sanitize textarea input (strip html tags, and escape characters)
 			  if ( ($tmp['street'] == $input['street']) && ($input['street']!= '') ) {
@@ -1671,7 +1705,7 @@ echo '</pre>';
 								$css_id = $prefix.$usage.$family.'_'.$id;
 
 								//
-								$class = $prefix.$usage.$family.' '.$prefix.$usage.$id;
+								$class = $prefix.$usage.$family.' '.$prefix.$usage.$id.' '.$prefix.$family.$id;
 								$class = ( isset( $field['class'] ) ) ? $class.' '.$field['class'] : $class;
 
 								// pre-define if to use scope="rowgroup" or tr without th
@@ -1736,7 +1770,7 @@ echo '</pre>';
 																	$formfield .= '<input id="'.$css_id.'-upload" class="wp-cmm_call-wp-mediamanagement" type="button" value="'.__( 'Upload' ).'">';
 																break;
 
-
+/*
 																case 'multipleselect':
 																	$formfield .= '<select name="'.$name.'[]" id="'.$css_id.'" class="'.$class.'" multiple>';
 																	foreach ($field['options'] as $value => $label ) {
@@ -1745,13 +1779,14 @@ echo '</pre>';
 																	}
 																	$formfield .= '</select>';
 																break;
-
+*/
 
 																case 'terms_checklist':
 																	$formfield .= '<ul id="'.$css_id.'" class="categorychecklist form-no-clear '.$class.'" >';
 																	foreach ($field['options'] as $value => $label ) {
 																	 		$checked = ( in_array( $value, $field['value'] ) ) ? ' checked' : '';
 																			$formfield .= '<li><label for="'.$css_id.'-'.$value.'"><input'.$checked.' type="checkbox" name="'.$name.'['.$value.']" id="'.$css_id.'-'.$value.'" value="1" />'.$label.'</label></li>';
+#																			$formfield .= '<li><label for="'.$css_id.'-'.$value.'"><input'.$checked.' type="checkbox" name="'.$name.'" id="'.$css_id.'-'.$value.'" value="'.$value.'" />'.$label.'</label></li>';
 																	}
 																	$formfield .= '</ul>';
 																break;
@@ -1786,7 +1821,7 @@ echo '</pre>';
 
     
 		/**
-		 *  Set default options
+		 *  Set default options on first install
 		 *  or keep user settings on reactivation
 		 *
 		 *  @since  0.0.1
@@ -1797,86 +1832,114 @@ echo '</pre>';
     	  $tmp = get_option('CMM_general_opts');
         if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
         		delete_option('CMM_general_opts');
-        		$CMM_general_opts = array(
-								"version"  								=> CloudMadeMap::VERS,
-								"style_ID"  							=> null,
-								"api_key"   							=> null,
-								"flickr_places_api_key"   => null,
-								"pp_static" 							=> null,
-								"pp_widget" 							=> null,
-								"pp_active" 							=> null,
-								"posttypes" 							=> array( 'post', 'page' ),
-								"da_street" 							=> null,
-								"da_zip" 									=> null,
-								"da_city" 								=> null,
-								"da_region" 							=> null,
-								"da_region_code"					=> null,
-								"da_country" 							=> null,
-								"da_lat" 									=> null,
-								"da_lng" 									=> null,
-								"add_meta_tag" 						=> 1,
-								"add_microformat_geo_tag" => 1,
-								"chk_default_options_db"  => 1
-            );
-        		add_option('CMM_general_opts', $CMM_general_opts, ' ', 'no' );
+        		add_option('CMM_general_opts', $this->get_default_opts ( 'general' ), ' ', 'no' );
     	  }
 
         // Static Maps Options
     	  $tmp = get_option('CMM_static_opts');
         if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
         		delete_option('CMM_static_opts');
-        		$CMM_static_opts = array(
-								"width"    								=> 600,
-    						"height"   								=> 400,
-    						"zoom"     								=> 9,
-                "marker_icon" 						=> plugins_url( 'img/marker_icon.png' , __FILE__ ),
-								"align"       						=> 'none',
-								"caption"     						=> NULL,
-								"bg_element"  						=> 'html',
-                "show_example"						=> 1,
-    						"chk_default_options_db"  => 1
-        		);
-        		add_option('CMM_static_opts', $CMM_static_opts, ' ', 'no' );
+        		add_option('CMM_static_opts', $this->get_default_opts ( 'static' ), ' ', 'no' );
     	  }
 
         // Active Maps Options
     	  $tmp = get_option('CMM_active_opts');
         if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
         		delete_option('CMM_active_opts');
-        		$CMM_active_opts = array(
-								"width"    								=> 600,
-								"height"   								=> 400,
-								"zoom"     								=> 9,
-		            "minzoom"     						=> 2,
-		            "maxzoom"     						=> 18,
-		            "control"      						=> 'N',
-		            "scale"										=> null,
-		            "overview" 								=> null,
-		            "marker_icon" 						=> plugins_url( 'img/marker_icon.png' , __FILE__ ),
-		            "marker_icon_width"   		=> '16',
-		            "marker_icon_height"  		=> '16',
-		            "marker_labels"       		=> 1,
-		            "align"        						=> 'none',
-								"caption"     						=> null,
-		            "copyright"     					=> null,
-								"show_example" 						=> 1,
-								"chk_default_options_db"  => 1
-            );
-        		add_option('CMM_active_opts', $CMM_active_opts, ' ', 'no' );
+        		add_option('CMM_active_opts', $this->get_default_opts ( 'active' ), ' ', 'no' );
     	  }
     }
 
 
+
 		/**
+		 *  Get default options
+		 *  used for activation and upgrade
 		 *
+		 *  @since  0.0.6
+		 */
+	 	private function get_default_opts ( $option ) {
+        switch ( $option ) {
+
+		        case 'general':
+	        		$default_opts = array(
+									"version"  								=> CloudMadeMap::VERS,
+									"style_ID"  							=> null,
+									"api_key"   							=> null,
+									"flickr_places_api_key"   => null,
+									"pp_static" 							=> null,
+									"pp_widget" 							=> null,
+									"pp_active" 							=> null,
+									"posttypes" 							=> array( 'post', 'page' ),
+									"da_street" 							=> null,
+									"da_zip" 									=> null,
+									"da_city" 								=> null,
+									"da_region" 							=> null,
+									"da_region_code"					=> null,
+									"da_country" 							=> null,
+									"da_lat" 									=> null,
+									"da_lng" 									=> null,
+									"add_meta_tag" 						=> 1,
+									"add_microformat_geo_tag" => 1,
+									"chk_default_options_db"  => 1
+	            );
+		        	break;
+
+						case 'static':
+	        		$default_opts = array(
+									"width"    								=> 600,
+	    						"height"   								=> 400,
+	    						"zoom"     								=> 9,
+	                "marker_icon" 						=> plugins_url( 'img/marker_icon.png' , __FILE__ ),
+									"align"       						=> 'none',
+									"caption"     						=> NULL,
+									"bg_element"  						=> 'html',
+	                "show_example"						=> 1,
+	    						"chk_default_options_db"  => 1
+        			);
+		        	break;
+
+						case 'active':
+	        		$default_opts = array(
+									"width"    								=> 600,
+									"height"   								=> 400,
+									"zoom"     								=> 9,
+			            "minzoom"     						=> 2,
+			            "maxzoom"     						=> 18,
+			            "control"      						=> 'N',
+			            "scale"										=> null,
+			            "overview" 								=> null,
+			            "marker_icon" 						=> plugins_url( 'img/marker_icon.png' , __FILE__ ),
+			            "marker_icon_width"   		=> '16',
+			            "marker_icon_height"  		=> '16',
+			            "marker_labels"       		=> 1,
+			            "align"        						=> 'none',
+									"caption"     						=> null,
+			            "copyright"     					=> null,
+									"show_example" 						=> 1,
+									"chk_default_options_db"  => 1
+	            );
+		        	break;
+        }
+        return $default_opts;
+		}
+
+
+
+
+		/**
+		 *  Upgrade options in the DB if this is a new version
+		 *  keep old settings and set everything new to its defaults
+		 *
+		 *  @since 0.0.5
 		 */
     private function upgrade ( ) {
 				if ( version_compare ( $this->general_opts['version'], self::VERS, "<" ) ) {
-					# echo $this->general_opts['version'].' run update on '.self::VERS;
-					 
-					 #$updated_general_opts  =  $this->general_opts + $default_general_opts;
-					 
-					 #update_option( 'CMM_general_opts', $updated_general_opts );
+
+					 $updated_general_opts  =  $this->general_opts + $this->get_default_opts ( 'general' );
+           $updated_general_opts['version'] = self::VERS;
+
+					 update_option( 'CMM_general_opts', $updated_general_opts );
 				}
     }
     
