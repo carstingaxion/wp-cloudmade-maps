@@ -1,7 +1,7 @@
 === WP Cloudmade Maps ===
 Contributors: 			carstenbach
 Donate link: 				https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XHR4SXESC9RJ6
-Tags: 							geo, geocoding, location, cloudmade, map, osm, openstreetmap, shortcode, tinymce-button, user-friendly GUI, widget
+Tags: 							geo, geocoding, location, cloudmade, map, osm, openstreetmap, shortcode, tinymcebutton, GUI, widget
 Author URI:       	http://carsten-bach.de
 Author:            	Carsten Bach
 Requires at least: 	3.1
@@ -58,7 +58,6 @@ As Administrator you're able to set everything as defaults, so your editor just 
 * show map scale
 * navigate within a small overview-map
 * add descriptive labels to your map-markers
-* show posts `the_content()`, `the_excerpt()` or own html in an Info-Window attached to the marker
 
 
 = Active Maps for multiple Marker - Features =
@@ -72,13 +71,13 @@ This part exists, but is still in development and not really production-ready. S
 	* defined date-ranges,
 	* specific post-types,
 	* or anything else you could pick up and filter with a [WP_Query request](http://codex.wordpress.org/Class_Reference/WP_Query "See the codex to get an idea of the possibilities") - this is the higher vision ;)
-* show posts `the_content()` or `the_excerpt()` in an Info-Window attached to each marker
+* attach Info-Window to each marker and show `the_content()`, `the_excerpt()` or own `html` based on a templatefile
 
 
 = Languages =
 
-* English
-* German
+* English (en_US)
+* German (de_DE)
 
 
 
@@ -138,18 +137,18 @@ Drop me a line at wp-cloudmade-maps@carsten-bach.de
 
 = 0.0.6 ( January 2012 ) =
 
-*   add: optimized the usability of the GUI for mutual dependence of some options
-*   add: alternate marker-title to marker of interactive single maps using the GUI
-*   fix: CSS improvements for the GUI
-*   fix: wrong jQuery fallback path
-*   add: filter markers on active-group-maps by post_type
-*   add: choose, via the GUI, what content to show in infoWindow attached to markers on active_group_maps: nothing, `the_excerpt()`, `the_content()` or to use an own templatefile
-*   add: sample template-file for infoWindow output, ready to modify and use in your theme
-*   fix: updated the help-section for static_maps and active_single_maps
-*   fix: updated the german translation
-*   add: pot-file
-*
-*
+*   **add**: optimized the usability of the GUI for mutual dependence of some options
+*   **add**: alternate marker-title to marker of interactive single maps using the GUI
+*   **fix**: CSS improvements for the GUI
+*   **fix**: wrong jQuery fallback path
+*   **add**: filter markers on active-group-maps by post_type
+*   **add**: choose, via the GUI, what content to show in infoWindow attached to markers on active_group_maps: nothing, `the_excerpt()`, `the_content()` or to use an own templatefile
+*   **add**: sample template-file for infoWindow output, ready to modify and use in your theme
+*   **fix**: updated the help-section for static_maps and active_single_maps
+*   **fix**: updated the german translation
+*   **add**: pot-file
+
+
 = 0.0.5 ( December 2011 ) =
 
 *   first public release
