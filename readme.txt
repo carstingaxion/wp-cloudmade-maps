@@ -6,7 +6,7 @@ Author URI:       	http://carsten-bach.de
 Author:            	Carsten Bach
 Requires at least: 	3.1
 Tested up to: 			3.3.1
-Stable tag: 				0.0.6
+Stable tag: 				0.0.7
 
 Add static and interactive cloudmade maps to your website, using a widget, different shortcodes and a tinymce GUI for user-friendly map-embedding.
 
@@ -127,13 +127,24 @@ Drop me a line at wp-cloudmade-maps@carsten-bach.de
 2. General Settings Screen
 3. Settings Screen for Static maps options
 4. Settings Screen for Active maps options
-5. Edit Screen for new or existing posts, where to locate your current post
+5. "Choose Location" metabox on the Edit Screen
+6. Map inserted in post as "user-friendly" shortcode
 
 
 
 
 
 == Changelog ==
+
+= 0.0.7 ( January 2012 ) =
+*   **fix**: JS validation: if inserted a map, but no location, is triggered now only if map shortcode is really inserted
+*   **add**: update or delete existing maps within the GUI
+*   **fix**: moved tinyMCE language strings into .po / .mo files
+*   **fix**: Fatal Error "Unsupported operand types" during activation
+* 	**add**: fullscreen switcher to active maps
+*   **fix**: also delete widget-options on de-activation
+*   **fix**: fixed the links to the option-pages inside the Admin-Notices
+
 
 = 0.0.6 ( January 2012 ) =
 
@@ -168,7 +179,7 @@ If there is nothing from you, I'll go on doing one of the following:
 * give the ability to define horizontal- and vertical-anchor for larger Marker Icons
 * add an option to decide, whether to output xhtml or html markup
 * add geo:RSS markup to feeds
-* add an error message for non-existing default latitude and longitude
+* add an error message for non-existing default latitude and longitude in general settings
 * add the ability to show the active maps with a caption of the address
 * add a "show on map link", to jump directly to a specific point
 * upload an "out of range" tile image
@@ -177,6 +188,5 @@ If there is nothing from you, I'll go on doing one of the following:
 * upload own cluster images
 * add routing between two points, your posts position and your site-visitors position for example
 * remove PHP notices and warnings from the widget code
-* edit, update or delete existing maps within the GUI
 * setup a demo page with example maps
-* add fullscreen switcher to active maps
+* GUI bugfix: pre-selected checkboxes could't be de-selected by inserting via GUI

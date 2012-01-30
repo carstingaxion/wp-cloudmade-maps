@@ -20,3 +20,26 @@ body.wp-admin .wp-cmm_map-wrap{
 		max-width: inherit !important;
 }
 
+/** fullscreen-controls **/
+.wml-container .fullscreen-control {
+	top: 10px;
+	right: 10px;
+	position: absolute;
+	height: 22px;
+}
+
+.wml-button-fullscreen{
+		width: 17px;
+		height: 17px;
+		display: block;
+		position: absolute;
+		top: 5px;
+		left: 5px;
+}
+
+.wml-button-enable-fullscreen{
+  background: url('../img/enable_fullscreen.png') no-repeat scroll center transparent;
+}
+.wml-button-disable-fullscreen{
+  background: url('../img/disable_fullscreen.png') no-repeat scroll center transparent;
+}

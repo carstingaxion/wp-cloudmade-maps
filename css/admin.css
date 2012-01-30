@@ -111,6 +111,10 @@
 		height:auto!important;
 }
 
+.wp-cmm_settings select option{
+		padding-right:10px;
+}
+
 .wp-cmm_settings label input,
 .wp-cmm_settings label select{
   	margin-right: 5px;
@@ -251,6 +255,24 @@
 #cmm_choose_location_legend input.waiting{
 		color:#e2e2e2;
 		background: #fff url('/wp-admin/images/wpspin_light.gif') 98% 50%  no-repeat;
+}
+
+
+#wp-cmm_edit-delete-handler{	position: fixed!important;	}
+#wp-cmm_edit-delete-handler:hover{	display:block!important;	}
+#wp-cmm_edit-delete-handler img {
+		background-color: #EEE;
+		margin: 2px;
+		padding: 2px;
+		border: 1px solid #999;
+		-moz-border-radius: 3px;
+		-khtml-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+}
+#wp-cmm_edit-delete-handler img:hover {
+		background-color: #dfdfdf;
+		border-color:#000;
 }
 
 

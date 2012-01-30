@@ -5,7 +5,7 @@
     Description:  Add static and interactive cloudmade maps to your website, using a widget, different shortcodes and a tinymce GUI for user-friendly map-embedding.
     Author:       Carsten Bach
     Author URI:   http://carsten-bach.de
-    Version:      0.0.6
+    Version:      0.0.7
     License:      GPL
 
     Copyright 2011  Carsten Bach  (email: mail@carsten-bach.de)
@@ -33,7 +33,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
   class CloudMadeMap {
 
     const LANG = __CLASS__;
-		const VERS = '0.0.6';
+		const VERS = '0.0.7';
 		const NAME = 'WP Cloudmade Maps';
 		const WPNEED = '3.1';
 		const PHPNEED = '5.2.4';
@@ -267,7 +267,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 		 */
 		public function load_js_and_css ( $posts ) {
 
-				// check for existence of "static-maps"-Pluginpart
+				// if geo-html is rendered, use css to hide it
 		    if ( $this->general_opts['add_microformat_geo_tag'] ) {
             $this->frontend_map_css();
 				}
@@ -437,6 +437,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
           'control'    			=> $this->active_opts['control'],
           'scale'       		=> $this->active_opts['scale'],
           'overview'    		=> $this->active_opts['overview'],
+          'fullscreen'   		=> $this->active_opts['fullscreen'],
           'marker_labels'		=> $this->active_opts['marker_labels'],
           'title'       		=> $post->post_title,
           'copyright'   		=> $this->active_opts['copyright'],
@@ -454,6 +455,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
         $this->localized_vars['zoomControl']    	= $control;
         $this->localized_vars['scale']          	= $scale;
         $this->localized_vars['minimap']        	= $overview;
+        $this->localized_vars['fullscreen']       = $fullscreen;
         $this->localized_vars['copyrightElement'] = $copyright;
         $this->localized_vars['clusterradius'] 		= '';
 
@@ -523,8 +525,9 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
           'control'    			=> $this->active_opts['control'],
           'scale'       		=> $this->active_opts['scale'],
           'overview'    		=> $this->active_opts['overview'],
+          'fullscreen'   		=> $this->active_opts['fullscreen'],
           'marker_labels'   => $this->active_opts['marker_labels'],
-          'infoWcontent'    => false,
+          'infowcontent'    => 'none',
           'copyright'   		=> $this->active_opts['copyright'],
           'align'           => $this->active_opts['align'],
           'labels_as_link'  => false,
@@ -550,6 +553,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
         $this->localized_vars['zoomControl']    	= $control;
         $this->localized_vars['scale']          	= $scale;
         $this->localized_vars['minimap']        	= $overview;
+        $this->localized_vars['fullscreen']       = $fullscreen;
         $this->localized_vars['copyrightElement'] = $copyright;
         $this->localized_vars['clusterradius'] 		= $clusterradius;
         
@@ -589,10 +593,11 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 
 						// get latitude & longitude for the current post
 				    $coordinates = $this->get_coordinates( $post );
-				    
+
 				    // build infoWindow Content
-						if ( $infoWcontent && $infoWcontent != 'none' ) {
-								switch ( $infoWcontent ) {
+						if ( $infowcontent && $infowcontent != 'none' ) {
+
+								switch ( $infowcontent ) {
 					        case 'excerpt' :
                     $infoWindowContent  = get_the_excerpt();
 					        	break;
@@ -600,6 +605,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 					        case 'content' :
 					          // retrieve unfiltered content
                     $infoWindowContent = get_the_content();
+                    
                     // do the same stuff as on the_content()
                     $infoWindowContent = apply_filters('the_content', $infoWindowContent);
 										$infoWindowContent = str_replace(']]>', ']]&gt;', $infoWindowContent);
@@ -847,11 +853,19 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 		    $this->cmm_base['zoomIn'] =  __( 'Zoom in', self::LANG);
 		    $this->cmm_base['zoomOut'] =  __( 'Zoom out', self::LANG);
 
+		    $this->cmm_base['enable_fullscreen'] =  __( 'Switch to fullscreen', self::LANG);
+		    $this->cmm_base['disable_fullscreen'] =  __( 'Switch to normal size', self::LANG);
+		    
         $this->cmm_base['Region'] = __('Region',self::LANG);
         $this->cmm_base['County'] = __('County',self::LANG);
         $this->cmm_base['Country'] = __('Country',self::LANG);
         $this->cmm_base['Neighborhood'] = __('Neighborhood',self::LANG);
         $this->cmm_base['Building'] = __('Building',self::LANG);
+        
+        if ( is_admin() ) {
+        $this->cmm_base['update_map'] = __( 'Update map', self::LANG );
+        $this->cmm_base['buttontitle'] = __( 'Insert map', self::LANG ).' ('.self::NAME.')';
+				}
 
         wp_localize_script( 'CMM_active_map', 'cmm_base', $this->cmm_base );
     }
@@ -1407,7 +1421,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
                     'Please insert a Cloudmade API key at %1$s.'
                     ,self::LANG
                 )
-                ,'<a href="'.admin_url('admin.php?page='.CMM_PLUGIN_DIR.'/menu/general.php#api_key').'" title="'.self::NAME." ".__('General')." ".__('Settings').'">'.self::NAME." ".__('General')." ".__('Settings').'</a>'
+                ,'<a href="'.admin_url('admin.php?page='.sanitize_title_with_dashes( strtolower( self::NAME ) ).'-general-options#api_key').'" title="'.self::NAME." ".__('General')." ".__('Settings').'">'.self::NAME." ".__('General')." ".__('Settings').'</a>'
             );
         }
 
@@ -1418,7 +1432,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
                     'Please define at least one post_type, where to load the "%2$s" meta box on the edit screen at %1$s.'
                     ,self::LANG
                 )
-                ,'<a href="'.admin_url('admin.php?page='.CMM_PLUGIN_DIR.'/menu/general.php#posttypes').'" title="'.self::NAME." ".__('General')." ".__('Settings').'">'.self::NAME." ".__('General')." ".__('Settings').'</a>'
+                ,'<a href="'.admin_url('admin.php?page='.sanitize_title_with_dashes( strtolower( self::NAME ) ).'-general-options#posttypes').'" title="'.self::NAME." ".__('General')." ".__('Settings').'">'.self::NAME." ".__('General')." ".__('Settings').'</a>'
                 ,__( 'Choose location', self::LANG )
             );
         }
@@ -1547,11 +1561,17 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
         $output .= '</div>';
 
 				// generate map
-				$output .= do_shortcode('[cmm_active_single width="100%" height="300" marker_labels="1" title="'.__( 'Choose location', self::LANG ).'" scale="0" control="S" minzoom="1" maxzoom="18" zoom="16" overview="0" copyright="#footer-upgrade" align="none"]');
+				$output .= do_shortcode('[cmm_active_single width="100%" height="300" marker_labels="1" title="'.__( 'Choose location', self::LANG ).'" scale="0" control="S" minzoom="1" maxzoom="18" zoom="16" overview="0" copyright="#footer-upgrade" align="none" fullscreen="false"]');
         
         // generate error message to remind user to choose location
     		$output .= '<div id="'.self::PREFIX.'reminder-to-choose-location" class="error" style="display:none;"><p><strong>'.self::NAME.'</strong>: '.sprintf( __( 'Please <a href="%1$s">choose a location</a> before saving.', self::LANG ), '#cmm_chose_location') .'</p></div>';
     		
+    		// generate GUI handler for editing and deletion
+    		$output .= '<div id="'.self::PREFIX.'edit-delete-handler" style="display:none;">'.
+											'<img src="'.plugins_url( 'img/CMM_32.png', __FILE__ ).'" id="'.self::PREFIX.'update-handler" alt="'.__( 'Update map', self::LANG ).'" title="'.__( 'Update map', self::LANG ).'" width="24" height="24" />'.
+											'<img src="/wp-includes/js/tinymce/plugins/wpeditimage/img/delete.png" id="'.self::PREFIX.'delete-handler" alt="'.__( 'Delete map', self::LANG ).'" title="'.__( 'Delete map', self::LANG ).'" />'.
+									 '</div>';
+									 
         echo $output;
     }
 
@@ -1819,38 +1839,6 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 		    } // end foreach
 		}
 
-    
-		/**
-		 *  Set default options on first install
-		 *  or keep user settings on reactivation
-		 *
-		 *  @since  0.0.1
-		 */
-    static function activate ( ) {
-
-        // General Options
-    	  $tmp = get_option('CMM_general_opts');
-        if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
-        		delete_option('CMM_general_opts');
-        		add_option('CMM_general_opts', $this->get_default_opts ( 'general' ), ' ', 'no' );
-    	  }
-
-        // Static Maps Options
-    	  $tmp = get_option('CMM_static_opts');
-        if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
-        		delete_option('CMM_static_opts');
-        		add_option('CMM_static_opts', $this->get_default_opts ( 'static' ), ' ', 'no' );
-    	  }
-
-        // Active Maps Options
-    	  $tmp = get_option('CMM_active_opts');
-        if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
-        		delete_option('CMM_active_opts');
-        		add_option('CMM_active_opts', $this->get_default_opts ( 'active' ), ' ', 'no' );
-    	  }
-    }
-
-
 
 		/**
 		 *  Get default options
@@ -1858,7 +1846,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 		 *
 		 *  @since  0.0.6
 		 */
-	 	private function get_default_opts ( $option ) {
+	 	static function get_default_opts ( $option ) {
         switch ( $option ) {
 
 		        case 'general':
@@ -1909,7 +1897,8 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 			            "control"      						=> 'N',
 			            "scale"										=> null,
 			            "overview" 								=> null,
-			            "marker_icon" 						=> plugins_url( 'img/marker_icon.png' , __FILE__ ),
+                  "fullscreen"              => 1,
+									"marker_icon" 						=> plugins_url( 'img/marker_icon.png' , __FILE__ ),
 			            "marker_icon_width"   		=> '16',
 			            "marker_icon_height"  		=> '16',
 			            "marker_labels"       		=> 1,
@@ -1925,8 +1914,6 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 		}
 
 
-
-
 		/**
 		 *  Upgrade options in the DB if this is a new version
 		 *  keep old settings and set everything new to its defaults
@@ -1934,16 +1921,80 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 		 *  @since 0.0.5
 		 */
     private function upgrade ( ) {
-				if ( version_compare ( $this->general_opts['version'], self::VERS, "<" ) ) {
 
-					 $updated_general_opts  =  $this->general_opts + $this->get_default_opts ( 'general' );
-           $updated_general_opts['version'] = self::VERS;
+				if ( $this->general_opts['version'] && version_compare ( $this->general_opts['version'], self::VERS, "<" ) ) {
 
-					 update_option( 'CMM_general_opts', $updated_general_opts );
+					 if ( is_array( $this->general_opts ) && is_array( $this->get_default_opts ( 'general' ) ) ) {
+							 // set new added general opts to their defaults and keep old settings
+							 $updated_general_opts  =  $this->general_opts + $this->get_default_opts ( 'general' );
+							 // set new Version number
+							 $updated_general_opts['version'] = self::VERS;
+							 update_option( 'CMM_general_opts', $updated_general_opts );
+					 }
+/*
+echo '<pre>';
+echo '<h1>$this->general_opts</h1>';
+var_dump( $this->general_opts );
+echo '</pre>';
+
+echo '<pre>';
+echo '<h1>$this->get_default_opts ( general )</h1>';
+var_dump( $this->get_default_opts ( 'general' ) );
+echo '</pre>';
+
+echo '<pre>';
+echo '<h1>$updated_general_opts</h1>';
+var_dump( $updated_general_opts  );
+echo '</pre>';
+   */
+					 if ( is_array( $this->static_opts ) && is_array( $this->get_default_opts ( 'static' ) ) ) {
+							 // set new added static opts to their defaults and keep old settings
+							 $updated_static_opts  =  $this->static_opts + $this->get_default_opts ( 'static' );
+							 update_option( 'CMM_static_opts', $updated_static_opts );
+					 }
+
+					 if ( is_array( $this->active_opts ) && is_array( $this->get_default_opts ( 'active' ) ) ) {
+							 // set new added active opts to their defaults and keep old settings
+							 $updated_active_opts  =  $this->active_opts + $this->get_default_opts ( 'active' );
+							 update_option( 'CMM_active_opts', $updated_active_opts );
+					 }
 				}
     }
-    
-    
+
+
+		/**
+		 *  Set default options on first install
+		 *  or keep user settings on reactivation
+		 *
+		 *  @since  0.0.1
+		 */
+    static function activate ( ) {
+
+
+				$wpcmm = new CloudMadeMap;
+        // General Options
+    	  $tmp = get_option('CMM_general_opts');
+        if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
+        		delete_option('CMM_general_opts');
+        		add_option('CMM_general_opts', $wpcmm->get_default_opts ( 'general' ), ' ', 'no' );
+    	  }
+
+        // Static Maps Options
+    	  $tmp = get_option('CMM_static_opts');
+        if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
+        		delete_option('CMM_static_opts');
+        		add_option('CMM_static_opts', $wpcmm->get_default_opts ( 'static' ), ' ', 'no' );
+    	  }
+
+        // Active Maps Options
+    	  $tmp = get_option('CMM_active_opts');
+        if( $tmp['chk_default_options_db'] == 1 || !is_array( $tmp ) ) {
+        		delete_option('CMM_active_opts');
+        		add_option('CMM_active_opts', $wpcmm->get_default_opts ( 'active' ), ' ', 'no' );
+    	  }
+    }
+
+
 		/**
 		 *  fall asleep and do nothing ;)
 		 */
@@ -1962,8 +2013,8 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 				delete_option('CMM_general_opts');
         delete_option('CMM_static_opts');
         delete_option('CMM_active_opts');
-#        delete_option('widget_cmm_last_geoposts-__i__');
-#        delete_option('widget_cmm_last_geoposts');
+        delete_option('widget_cmm_last_geoposts-__i__');
+        delete_option('widget_cmm_last_geoposts');
     }
 
     

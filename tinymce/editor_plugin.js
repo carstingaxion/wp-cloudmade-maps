@@ -18,7 +18,7 @@
 					width : 600,
 					height : "auto",
 					wpDialog : true,
-					title : ed.getLang('cloudmademap.buttontitle')
+					title : cmm_base.buttontitle
 				}, {
 					plugin_url : url
 				});
@@ -27,7 +27,7 @@
 
 			// Register buttons
 			ed.addButton('cloudmademap', {
-				title : 'cloudmademap.buttontitle',
+				title : cmm_base.buttontitle,
 				cmd : 'mceCMM',
 				image : url + '/../img/CMM_16.png'
 			});

@@ -53,10 +53,12 @@ jQuery(document).ready(function($) {
 		        if ( $(this).val() ) {
 		            $('#wp-cmm_options_general_pp_static').disableFormField( { status: false } );
 		            $('#wp-cmm_options_general_pp_active').disableFormField( { status: false } );
+		            $('.form-table tr:not(.wp-cmm_api_key)').show();
 		        } else {
 		            $('#wp-cmm_options_general_pp_static').disableFormField();
 		            $('#wp-cmm_options_general_pp_widget').disableFormField();
 		            $('#wp-cmm_options_general_pp_active').disableFormField();
+		            $('.form-table tr:not(.wp-cmm_api_key)').hide();
 		        }
 		    });
 		    // on page load
@@ -64,10 +66,12 @@ jQuery(document).ready(function($) {
 		        if ( $('#wp-cmm_options_general_api_key').val() ) {
 		            $('#wp-cmm_options_general_pp_static').disableFormField( { status: false } );
 		            $('#wp-cmm_options_general_pp_active').disableFormField( { status: false } );
+
 		        } else {
 		            $('#wp-cmm_options_general_pp_static').disableFormField();
 		            $('#wp-cmm_options_general_pp_widget').disableFormField();
 		            $('#wp-cmm_options_general_pp_active').disableFormField();
+		            $('.form-table tr:not(.wp-cmm_api_key)').hide();
 		        }
 		    });
 
@@ -291,6 +295,8 @@ jQuery(document).ready(function($) {
 
 				// Find the user (using the W3C geolocation API and IP as a fallback)
 				if ( typeof CMM_geo_lib != 'undefined' && typeof CMM_geo_lib.flickr_places_api_key != 'undefined' && CMM_geo_lib.flickr_places_api_key != '' ) {
+						console.log(typeof CMM_geo_lib.flickr_places_api_key + ": " + CMM_geo_lib.flickr_places_api_key);
+
 						yqlgeo.get('visitor',function(o){
 
 								$('.wml-container').remove();
@@ -322,18 +328,134 @@ jQuery(document).ready(function($) {
 		if ( $('body').is('.post-new-php, .post-php') ) {
 
 				/**
-				 *
-				 *
-				 *
+				 *  validate that user have choosen a location for an inserted map
+				 *  shows an error message and disables "Save" or "Publish"
 				 */
 				$("input#publish").click(function( e ) {
-						if ( $( '#content_ifr').contents().find('.wp-cmm_placeholderImage')
+						// look for the existense of shortcode placeholder-Image
+						if ( $( '#content_ifr').contents().find('.wp-cmm_placeholderImage').length
+						      // and if there is no adress given yet
 									&& ( $('#cmm_post_meta_lat').val() == '' || $('#cmm_post_meta_lng').val() == '' ) ) {
+								// disable save and publishing
 								e.preventDefault();
+								// hide wp loading image
 								$('img#ajax-loading').hide();
+								// let "Save" and "Publish" button look like "not clicked"
 								$("input#publish").removeClass('button-primary-disabled');
+								// show reminder
 								$('#wp-cmm_reminder-to-choose-location').show('slow');
 						}
+				});
+
+
+				/**
+				 *  attach edit and delete handler to inserted maps on hover
+ 				 */
+				$("#content_ifr").live("hover", function(event){
+						$( '#content_ifr').contents().find('.wp-cmm_placeholderImage').hover(
+							  function () {
+
+										// get left and top position of hovered shortcode placeholder-Image
+										var left =  $(this).offset().left +  $( '#content_ifr').offset().left + 3;
+										var top =  $(this).offset().top +  $( '#content_ifr').offset().top + 3;
+
+										// move and show handlers to hovered shortcode placeholder-Image
+										$('#wp-cmm_edit-delete-handler').show().offset({ top: top, left: left });
+							  },
+							  function () {
+							      // hide handlers
+										$('#wp-cmm_edit-delete-handler').hide();
+							  }
+						);
+				});
+
+
+				/**
+				 *  Delete selected map on handler click
+				 */
+				$('#wp-cmm_delete-handler').click( function( ){
+
+						// get left and top position of clicked handlers
+						var left =  $(this).parent().offset().left -  $( '#content_ifr').offset().left - 3;
+						var top =  $(this).parent().offset().top -  $( '#content_ifr').offset().top - 3;
+
+						// find underlying map by offset inside iframe
+						var iframeElem = parent.document.getElementById("content_ifr");
+						var elem = iframeElem.contentWindow.document.elementFromPoint( left, top ); // x, y
+
+						// delete shortcode placeholder-Image
+						$( elem ).remove();
+				
+				});
+
+
+				/**
+				 *  Open tinyMCE window to update current maps shortcode
+				 */
+				$('#wp-cmm_update-handler').click( function( ){
+				
+						// get left and top position of clicked handlers
+						var left =  $(this).parent().offset().left -  $( '#content_ifr').offset().left - 3;
+						var top =  $(this).parent().offset().top -  $( '#content_ifr').offset().top - 3;
+
+						// find underlying map by offset inside iframe
+						var iframeElem = parent.document.getElementById("content_ifr");
+						var elem = iframeElem.contentWindow.document.elementFromPoint( left, top ); // x, y
+
+				    // get shortcode from title attribute
+						var shortcode = $( elem ).attr('title').split("' ");
+//console.log(shortcode);
+
+						// get maptype from first element
+						var shortcode_type = shortcode[0].split(" ");
+						
+						// change shortcode array, to only contain attributes
+				    shortcode[0] = shortcode_type[1];
+
+						// rename maptype to fit the tinyMCE naming conventions
+						shortcode_type[0]	=	shortcode_type[0].replace( 'cmm', 'wp-cmm_tiny' );
+						
+						// call tinyMCE wp-dialog
+						tinyMCE.get( 'content' ).controlManager.get("content_cloudmademap").settings.onclick();
+
+						// choose correct form
+						var tiny_form_page = $('div#'+shortcode_type[0]);
+						
+						// rename title and action-button
+						$('#ui-dialog-title-cmm_tinymce_addshortcode_form').text( cmm_base.update_map );
+						$( tiny_form_page ).find('.button-primary').val( cmm_base.update_map );
+						
+						// choose correct tab inside wp-dialog
+						$('a[href="#'+shortcode_type[0]+'"]').trigger('click' );
+
+						// iterate over each shortcode attribute and update form inputs
+						if ( typeof shortcode != 'undefined' ) {
+								$( shortcode ).each(function(index) {
+
+										var keyValuePair = shortcode[index].split("='");
+										keyValuePair[1]	=	keyValuePair[1].replace( "'", "" );
+		//console.log(keyValuePair);
+
+										var input = $(tiny_form_page).find('[name*="['+keyValuePair[0]+']"]');
+		//console.log( $(input) );
+										if ( $(input).is(':text') ){
+								        $(input).val(keyValuePair[1]);
+										} else if ( $(input).is('select') ) {
+								        $(input).find('option[value="'+keyValuePair[1]+'"]').attr('selected',true);
+										} else if ( $(input).is(':radio') ) {
+								        $(input + '[value="'+keyValuePair[1]+'"]').attr('checked',true);
+										} else if ( $(input).is(':checkbox') ) {
+										    if ( $(input).val() == keyValuePair[1] ){
+		                        $(input).attr('checked',true);
+												} else {
+		                        $(input).attr('checked',false);
+												}
+										}
+
+								});
+						}
+
+						
 				});
 
 
@@ -341,15 +463,18 @@ jQuery(document).ready(function($) {
 				 *
 				 *
 				 *
-				 */
-				$(".meta-box-sortables #cmm_chose_location").mouseenter(function() {
+
+				$("#cmm_chose_location").mouseenter(function() {
 						CM.Event.addListener(wp_cmm_map, 'click', function( latlng ) {
+						
+						console.log(wp_cmm_map);
+						
 								wp_cmm_map._overlays[0].setLatLng( latlng );
 								wp_cmm_map._overlays[1].setLatLng( latlng );
 								$.fn.refreshCoordInputs ( latlng, 'cmm_post_meta' );
 						});
 				});
-
+				 */
 
 				/**
 				 *
@@ -425,7 +550,7 @@ jQuery(document).ready(function($) {
 						}
 
 						// find lat and lng by given adress and move map-marker
-						$(".meta-box-sortables #cmm_chose_location #cmm_find_location_on_map").click(function( ) {
+						$("#cmm_find_location_on_map").click(function( ) {
 
 								var fieldsToLook = [
 										"#cmm_post_meta_street",

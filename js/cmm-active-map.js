@@ -194,7 +194,7 @@ $.fn.addCloudMadeMapMarkers = function(
                                                           });        
         }                                                      
     		
-        wp_cmm_map = new CM.Map( containerID , cloudmade);
+        var wp_cmm_map = new CM.Map( containerID , cloudmade);
     		
         // Center the map to a standard position
     	  wp_cmm_map.setCenter( new CM.LatLng( opts.lat, opts.lng), opts.zoom );
@@ -249,7 +249,87 @@ $.fn.addCloudMadeMapMarkers = function(
 						    origCopyrightNote.contents().appendTo( opts.copyrightElement );
 				    }
 		    }
+		    
+        // Add fullscreen control
+        if ( opts.fullscreen == 1 ) {
 
+						// build html
+						var fs_control = $('<div class="wml-control wml-map-control fullscreen-control"><div class="wml-map-control-bottom"></div></div>');
+						var fs_enable = $('<a href="" title="'+ cmm_base.enable_fullscreen +'" class="wml-button-enable-fullscreen wml-button-fullscreen"></a>');
+						var fs_disable = $('<a href="" title="'+ cmm_base.disable_fullscreen +'" class="wml-button-disable-fullscreen wml-button-fullscreen"></a>').hide();
+						
+						// append html to control
+						$( fs_control ).appendTo('#' + containerID + '>.wml-container');
+						$( fs_enable ).appendTo('#' + containerID + ' .fullscreen-control');
+						$( fs_disable ).appendTo('#' + containerID + ' .fullscreen-control');
+						
+						// enable fullscreen
+						$( fs_enable ).click( function( e ) {
+						    e.preventDefault();
+
+								$('#'+containerID).css({ position: 'fixed', 'z-index': 100 });
+
+								var currentCenter = wp_cmm_map.getCenter();
+
+								$('#'+containerID).animate({
+                    height: $(window).height(),
+                    width: $(window).width(),
+                    top: 0,
+                    left: 0,
+								}, {
+								    duration: 2000,
+								    complete: function() {
+										    $( fs_enable ).hide();
+										    $( fs_disable ).show();
+												wp_cmm_map.checkResize();
+												wp_cmm_map.setCenter( currentCenter, wp_cmm_map.getZoom() );
+								    }
+								});
+						});
+						
+						// disable fullscreen
+						$( fs_disable ).click( function( e ) {
+						    e.preventDefault();
+								$('#'+containerID).css({ position: 'relative', 'z-index': 0 });
+
+								var currentCenter = wp_cmm_map.getCenter();
+								
+								$('#'+containerID).animate({
+                    height: opts.height,
+                    width: opts.width,
+								}, {
+								    duration: 500,
+								    complete: function() {
+										    $( fs_disable ).hide();
+										    $( fs_enable ).show();
+												wp_cmm_map.checkResize();
+												wp_cmm_map.setCenter( currentCenter, wp_cmm_map.getZoom() );
+
+								    }
+								});
+						});
+        }
+
+
+
+				if ( $('body.wp-admin').is('.post-new-php, .post-php') ) {
+
+				/**
+				 *
+				 *
+				 *
+				 */
+				$("#cmm_chose_location").mouseenter(function() {
+						CM.Event.addListener(wp_cmm_map, 'click', function( latlng ) {
+								wp_cmm_map._overlays[0].setLatLng( latlng );
+								wp_cmm_map._overlays[1].setLatLng( latlng );
+								$.fn.refreshCoordInputs ( latlng, 'cmm_post_meta' );
+						});
+				});
+				}
+				
+				
+				
         // Add Markers to the map
         $.fn.addCloudMadeMapMarkers (containerID, wp_cmm_map, opts.marker );
     }
@@ -267,4 +347,6 @@ $.fn.addCloudMadeMapMarkers = function(
 				$.fn.CloudMadeMap ( cid, window[id] );
 
 		});
+		
+		
 }); // end jQuery      

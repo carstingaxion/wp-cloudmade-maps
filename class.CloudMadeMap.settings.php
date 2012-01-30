@@ -527,7 +527,7 @@ $this->defined_active_opts = array(
 		'map-controls-row' => array(
 			'label'		=> __('Map controls', self::LANG ),
 			'type'		=> 'rowgroup',
-			'rows'    => 3,
+			'rows'    => 4,
 			'usage'   => array( 'options_', 'widget_', 'tiny_' ),
 		),
 		'control'	=> array (
@@ -558,6 +558,15 @@ $this->defined_active_opts = array(
 			'desc'		=> __( '"Minimum zoom level" must be 0 or 1 to make the overview map work', self::LANG ),
 			'type'		=> 'checkbox',
 			'value' 	=> $this->active_opts['overview'],
+			'usage'   => array( 'options_', 'widget_', 'tiny_' ),
+			'validate'=> 'numeric',
+			'validate_msg'  => false,
+		),
+		'fullscreen'	=> array(
+			'label'		=> __( 'Enable fullscreen switcher', self::LANG ),
+			'desc'		=> false,
+			'type'		=> 'checkbox',
+			'value' 	=> $this->active_opts['fullscreen'],
 			'usage'   => array( 'options_', 'widget_', 'tiny_' ),
 			'validate'=> 'numeric',
 			'validate_msg'  => false,
@@ -720,7 +729,7 @@ $this->defined_group_opts = array(
 			'validate_msg'  => false,
 			'options' => get_dynamic_settings_options ( 'posttypes' ),
 		),
-		'infoWcontent'	=> array (
+		'infowcontent'	=> array (
 			'label' 	=> __( 'Infowindow-Content', self::LANG ),
 			'desc'		=> sprintf( __( 'To use your own templatefile, just copy %1$s from the %2$s plugin-folder at %3$s into your theme folder and modify it to your needs.', self::LANG ), '<strong>cloudmademaps-infowindow.php</strong>', self::NAME, CMM_PLUGIN_DIR ),
 			'type'		=> 'radio',
