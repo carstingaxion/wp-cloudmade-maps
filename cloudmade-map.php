@@ -1,11 +1,11 @@
 <?php
 /*
     Plugin Name:  WP Cloudmade Maps
-    Plugin URI: 
+    Plugin URI:   https://github.com/carstingaxion/wp-cloudmade-maps
     Description:  Add static and interactive cloudmade maps to your website, using a widget, different shortcodes and a tinymce GUI for user-friendly map-embedding.
     Author:       Carsten Bach
     Author URI:   http://carsten-bach.de
-    Version:      0.0.7
+    Version:      0.0.8
     License:      GPL
 
     Copyright 2011  Carsten Bach  (email: mail@carsten-bach.de)
@@ -33,7 +33,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
   class CloudMadeMap {
 
     const LANG = __CLASS__;
-		const VERS = '0.0.7';
+		const VERS = '0.0.8';
 		const NAME = 'WP Cloudmade Maps';
 		const WPNEED = '3.1';
 		const PHPNEED = '5.2.4';
@@ -212,7 +212,8 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
 												add_shortcode('cmm_active_single', array( &$this, 'create_active_single_map' ) );
 
 												// Add scripts to load the map for the meta-box
-             						wp_enqueue_script( 'jquery-ui-core' );
+             						wp_enqueue_script( 'jquery' );
+                        wp_enqueue_script( 'jquery-ui-core' );
              						wp_enqueue_script( 'jquery-ui-widget' );
              						wp_enqueue_script( 'jquery-ui-tabs' );
 
@@ -1561,7 +1562,7 @@ if ( !class_exists( 'CloudMadeMap' ) ) {
         $output .= '</div>';
 
 				// generate map
-				$output .= do_shortcode('[cmm_active_single width="100%" height="300" marker_labels="1" title="'.__( 'Choose location', self::LANG ).'" scale="0" control="S" minzoom="1" maxzoom="18" zoom="16" overview="0" copyright="#footer-upgrade" align="none" fullscreen="false"]');
+				$output .= do_shortcode('[cmm_active_single width="100%" height="330" marker_labels="1" title="'.__( 'Choose location', self::LANG ).'" scale="0" control="S" minzoom="1" maxzoom="18" zoom="16" overview="0" copyright="#footer-upgrade" align="none" fullscreen="false"]');
         
         // generate error message to remind user to choose location
     		$output .= '<div id="'.self::PREFIX.'reminder-to-choose-location" class="error" style="display:none;"><p><strong>'.self::NAME.'</strong>: '.sprintf( __( 'Please <a href="%1$s">choose a location</a> before saving.', self::LANG ), '#cmm_chose_location') .'</p></div>';

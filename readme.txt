@@ -1,12 +1,12 @@
 === WP Cloudmade Maps ===
-Contributors: 			carstenbach
-Donate link: 				https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XHR4SXESC9RJ6
-Tags: 							geo, geocoding, location, cloudmade, map, osm, openstreetmap, shortcode, tinymcebutton, GUI, widget
-Author URI:       	http://carsten-bach.de
-Author:            	Carsten Bach
-Requires at least: 	3.1
-Tested up to: 			3.3.1
-Stable tag: 				0.0.7
+Contributors:   carstenbach
+Donate link:        https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XHR4SXESC9RJ6
+Tags:               geo, geocoding, location, cloudmade, map, osm, openstreetmap, shortcode, tinymcebutton, GUI, widget
+Author URI:         http://carsten-bach.de
+Author:             Carsten Bach
+Requires at least:  3.1
+Tested up to:       3.4.2
+Stable tag:         0.0.8
 
 Add static and interactive cloudmade maps to your website, using a widget, different shortcodes and a tinymce GUI for user-friendly map-embedding.
 
@@ -80,10 +80,6 @@ This part exists, but is still in development and not really production-ready. S
 * German (de_DE)
 
 
-
-
-
-
 == Installation ==
 
 1.  Extract the zip file
@@ -97,18 +93,8 @@ This part exists, but is still in development and not really production-ready. S
   	* `<?php do_shortcode('[cmm_active_group]'); ?>` in your templates
 
 
-
-
-
-
-
 == Upgrade Notice ==
 There a no upgrade issues at the moment ;)
-
-
-
-
-
 
 
 == Frequently Asked Questions ==
@@ -116,10 +102,6 @@ In the moment, there is no question I know about.
 
 Maybe you've some?!
 Drop me a line at wp-cloudmade-maps@carsten-bach.de
-
-
-
-
 
 
 == Screenshots ==
@@ -131,10 +113,15 @@ Drop me a line at wp-cloudmade-maps@carsten-bach.de
 6. Map inserted in post as "user-friendly" shortcode
 
 
-
-
-
 == Changelog ==
+= 0.0.8 ( September 2012 ) =
+*  moved to GitHub for easier development and issue tracking
+*  tested with WordPress 3.4.2
+*  updated readme.txt
+*   **fix**: Adjusted CSS for "Choose Location" meta_box
+*   **fix**: Enqueued jQuery properly to make meta_box Map work correct and show TinyMCE GUI with tabs 
+*   
+
 
 = 0.0.7 ( January 2012 ) =
 *   **fix**: JS validation: if inserted a map, but no location, is triggered now only if map shortcode is really inserted
@@ -169,7 +156,7 @@ Drop me a line at wp-cloudmade-maps@carsten-bach.de
 == Arbitrary section ==
 All shortcodes and its attributes are described and documented inside the WordPress "help"-tab on the upper right corner of each settings page. Have a look over there if you want to use the shortcodes in your theme files.
 
-If you are having a feature request for this plugin, drop me a line at wp-cloudmade-maps@carsten-bach.de.
+If you are having a feature request or bug-reports for this plugin, [open an issue](https://github.com/carstingaxion/wp-cloudmade-maps/issues/new) on github.com.
 If there is nothing from you, I'll go on doing one of the following:
 
 = roadmap =

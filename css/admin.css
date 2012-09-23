@@ -234,9 +234,9 @@
     right:0;
     z-index:100;
     width:14%;
+    min-width:155px;
     height:100%;
     padding:0 15px 8px;
-    min-width:130px;
     background-color: #f5f5f5;
     background-color: rgba(245,245,245,.9);
     font-size:120%;
